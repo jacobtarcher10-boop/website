@@ -37,31 +37,31 @@
    ========================================================================== */
 
 :root {
-  /* Palette — "After Dark": nocturnal noir, candlelight ivory, garnet
-     and champagne. Illustration cards stay light (parchment/blush) so the
-     line drawings read like framed prints against the dark page. */
-  --bg:              #141017;  /* main background — aubergine noir */
-  --surface:         #1E1721;  /* cards, panels, drawers */
-  --text:            #F5EDE3;  /* primary text — candlelight ivory */
-  --cream:           #F5EDE3;  /* explicit light ink for use on accent fills */
-  --accent:          #7E2B3A;  /* garnet — buttons, fills, bars */
-  --accent-strong:   #64202D;  /* hover / pressed fills */
-  --rose:            #C9909A;  /* standout text: links, prices (7:1 on noir) */
-  --gold:            #D5B78C;  /* champagne — eyebrows, focus rings, details */
-  --wine:            #3A2130;  /* deep gradient panels */
-  --wine-soft:       #2A1B26;  /* softer gradient stop */
-  --muted:           #A79DA4;  /* secondary text on noir */
-  --blush:           #E8D3CE;  /* light illustration-card tone */
-  --blush-soft:      #F2E6E2;  /* light illustration-card tone, softer */
-  --parchment:       #F0E6D9;  /* light illustration-card tone, warm */
-  --ink-on-light:    #2B211B;  /* stroke/text colour on the light cards */
+  /* Palette — "Daylight": warm ivory, espresso browns and honey. A light,
+     gallery-bright counterpart to After Dark. Illustration cards sit a shade
+     warmer than the page so the line drawings still read like framed prints. */
+  --bg:              #F4ECDD;  /* main background — warm oat cream */
+  --surface:         #FCF7EE;  /* cards, panels, drawers — soft ivory */
+  --text:            #3A2B1E;  /* primary text — deep espresso brown */
+  --cream:           #FCF7EE;  /* light ink for use on dark accent fills */
+  --accent:          #7C4A24;  /* chestnut — buttons, fills, bars */
+  --accent-strong:   #613718;  /* hover / pressed fills */
+  --rose:            #A24B26;  /* standout text: links, prices — terracotta */
+  --gold:            #9A6A24;  /* honey ochre — eyebrows, focus rings, detail */
+  --wine:            #EBD9B8;  /* warm gradient panels — honey sand */
+  --wine-soft:       #F3E8D2;  /* softer gradient stop — pale butter */
+  --muted:           #6E5C46;  /* secondary text — warm taupe (large text) */
+  --blush:           #EBDDC7;  /* light illustration-card tone */
+  --blush-soft:      #F3E9D7;  /* light illustration-card tone, softer */
+  --parchment:       #F0E6D3;  /* light illustration-card tone, warm */
+  --ink-on-light:    #3A2B1E;  /* stroke/text colour on the light cards */
 
   /* Derived tints (palette colours at low alpha — hairlines & washes) */
-  --hairline:        rgba(245, 237, 227, 0.14);
-  --hairline-strong: rgba(245, 237, 227, 0.34);
-  --hairline-cream:  rgba(245, 237, 227, 0.28);
-  --scrim:           rgba(8, 5, 10, 0.6);
-  --shadow-soft:     0 24px 60px -30px rgba(0, 0, 0, 0.8);
+  --hairline:        rgba(58, 43, 30, 0.14);    /* dark hairline on the light page */
+  --hairline-strong: rgba(58, 43, 30, 0.30);
+  --hairline-cream:  rgba(252, 247, 238, 0.30); /* light hairline for use on dark accent surfaces */
+  --scrim:           rgba(40, 28, 18, 0.40);
+  --shadow-soft:     0 24px 60px -30px rgba(58, 43, 30, 0.40);
 
   /* Typography */
   --font-display: "Fraunces", "Times New Roman", serif;
@@ -230,7 +230,7 @@ h3 { font-size: clamp(1.35rem, 2.5vw, 1.6rem); font-weight: 400; }
 
 .btn--primary:hover {
   background-color: var(--accent-strong);
-  box-shadow: 0 0 34px rgba(201, 144, 154, 0.25);
+  box-shadow: 0 0 34px rgba(201, 166, 110, 0.25);
 }
 
 .btn--ghost {
@@ -447,7 +447,7 @@ input::placeholder {
   position: sticky;
   top: 0;
   z-index: 40;
-  background-color: rgba(20, 16, 23, 0.88);
+  background-color: rgba(252, 247, 238, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--hairline);
@@ -633,7 +633,7 @@ input::placeholder {
 
 .hero {
   background:
-    radial-gradient(52rem 36rem at 82% 8%, rgba(201, 144, 154, 0.14), transparent 62%),
+    radial-gradient(52rem 36rem at 82% 8%, rgba(201, 166, 110, 0.14), transparent 62%),
     linear-gradient(160deg, var(--bg) 35%, var(--wine-soft) 100%);
   overflow: hidden;
 }
@@ -712,7 +712,7 @@ input::placeholder {
   width: 62%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 45% 45%, rgba(201, 144, 154, 0.28) 0%, rgba(201, 144, 154, 0.08) 55%, transparent 72%);
+  background: radial-gradient(circle at 45% 45%, rgba(201, 166, 110, 0.28) 0%, rgba(201, 166, 110, 0.08) 55%, transparent 72%);
   pointer-events: none;
 }
 
@@ -1188,7 +1188,7 @@ input::placeholder {
 }
 
 .signature-strip .eyebrow {
-  color: var(--gold);
+  color: #DDBB86; /* lighter honey — reads on the dark chestnut strip */
 }
 
 .signature-strip h2 {

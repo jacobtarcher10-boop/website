@@ -1,30 +1,30 @@
 {
   "current": {
-    "color_bg": "#141017",
-    "color_surface": "#1E1721",
-    "color_text": "#F5EDE3",
-    "color_accent": "#7E2B3A",
-    "color_accent_strong": "#64202D",
-    "color_rose": "#C9909A",
-    "color_gold": "#D5B78C",
-    "color_wine": "#3A2130",
-    "color_wine_soft": "#2A1B26",
-    "color_muted": "#A79DA4",
+    "color_bg": "#F4ECDD",
+    "color_surface": "#FCF7EE",
+    "color_text": "#3A2B1E",
+    "color_accent": "#7C4A24",
+    "color_accent_strong": "#613718",
+    "color_rose": "#A24B26",
+    "color_gold": "#9A6A24",
+    "color_wine": "#EBD9B8",
+    "color_wine_soft": "#F3E8D2",
+    "color_muted": "#6E5C46",
     "cart_drawer_enabled": true,
     "free_shipping_threshold": 50
   },
   "presets": {
-    "After Dark": {
-      "color_bg": "#141017",
-      "color_surface": "#1E1721",
-      "color_text": "#F5EDE3",
-      "color_accent": "#7E2B3A",
-      "color_accent_strong": "#64202D",
-      "color_rose": "#C9909A",
-      "color_gold": "#D5B78C",
-      "color_wine": "#3A2130",
-      "color_wine_soft": "#2A1B26",
-      "color_muted": "#A79DA4"
+    "Daylight": {
+      "color_bg": "#F4ECDD",
+      "color_surface": "#FCF7EE",
+      "color_text": "#3A2B1E",
+      "color_accent": "#7C4A24",
+      "color_accent_strong": "#613718",
+      "color_rose": "#A24B26",
+      "color_gold": "#9A6A24",
+      "color_wine": "#EBD9B8",
+      "color_wine_soft": "#F3E8D2",
+      "color_muted": "#6E5C46"
     }
   }
 }

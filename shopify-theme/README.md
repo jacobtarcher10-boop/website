@@ -1,7 +1,7 @@
-# Rose Archer — After Dark (Shopify theme)
+# Rose Archer — Daylight (Shopify theme)
 
 An Online Store 2.0 theme port of the Rose Archer storefront. It carries the
-same "After Dark" design (the CSS is shared with the static site) and renders
+same "Daylight" design (the CSS is shared with the static site) and renders
 real Shopify data — products, variants, collections, cart, search.
 
 The static site at the repo root remains the design reference; this folder is
@@ -55,7 +55,7 @@ shopify-theme/
 │   └── price.liquid
 ├── config/
 │   ├── settings_schema.json      Theme settings (palette, cart)
-│   └── settings_data.json        Defaults + "After Dark" preset
+│   └── settings_data.json        Defaults + "Daylight" preset
 ├── locales/
 │   └── en.default.json
 └── assets/

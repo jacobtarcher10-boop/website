@@ -88,33 +88,33 @@ Two further places to update once all photography exists:
 
 ## Changing colours & fonts
 
-The whole palette — the "After Dark" nocturnal theme — is defined once, at
+The whole palette — the "Daylight" warm theme — is defined once, at
 the top of `css/styles.css`:
 
 ```css
 :root {
-  --bg:            #141017;  /* main background — aubergine noir */
-  --surface:       #1E1721;  /* cards, panels, drawers */
-  --text:          #F5EDE3;  /* primary text — candlelight ivory */
-  --cream:         #F5EDE3;  /* explicit light ink on accent fills */
-  --accent:        #7E2B3A;  /* garnet — buttons, fills, bars */
-  --accent-strong: #64202D;  /* hover / pressed fills */
-  --rose:          #C9909A;  /* standout text: links, prices */
-  --gold:          #D5B78C;  /* champagne — eyebrows, focus rings */
-  --wine:          #3A2130;  /* deep gradient panels */
-  --wine-soft:     #2A1B26;  /* softer gradient stop */
-  --muted:         #A79DA4;  /* secondary text */
-  --blush:         #E8D3CE;  /* light illustration-card tone */
-  --blush-soft:    #F2E6E2;  /* light illustration-card tone, softer */
-  --parchment:     #F0E6D9;  /* light illustration-card tone, warm */
-  --ink-on-light:  #2B211B;  /* strokes/text on the light cards */
+  --bg:            #F4ECDD;  /* main background — warm oat cream */
+  --surface:       #FCF7EE;  /* cards, panels, drawers — soft ivory */
+  --text:          #3A2B1E;  /* primary text — deep espresso brown */
+  --cream:         #FCF7EE;  /* light ink on dark accent fills */
+  --accent:        #7C4A24;  /* chestnut — buttons, fills, bars */
+  --accent-strong: #613718;  /* hover / pressed fills */
+  --rose:          #A24B26;  /* standout text: links, prices — terracotta */
+  --gold:          #9A6A24;  /* honey ochre — eyebrows, focus rings */
+  --wine:          #EBD9B8;  /* warm gradient panels — honey sand */
+  --wine-soft:     #F3E8D2;  /* softer gradient stop — pale butter */
+  --muted:         #6E5C46;  /* secondary text — warm taupe */
+  --blush:         #EBDDC7;  /* light illustration-card tone */
+  --blush-soft:    #F3E9D7;  /* light illustration-card tone, softer */
+  --parchment:     #F0E6D3;  /* light illustration-card tone, warm */
+  --ink-on-light:  #3A2B1E;  /* strokes/text on the light cards */
 }
 ```
 
 Change a value there and it changes everywhere — buttons, links, focus rings,
-gradients, the bag drawer, the lot. The illustration cards deliberately stay
-light (`--blush`, `--blush-soft`, `--parchment`) so the line drawings read
-like framed prints against the dark page; their strokes use `--ink-on-light`.
+gradients, the bag drawer, the lot. The illustration cards sit a shade warmer
+than the page (`--blush`, `--blush-soft`, `--parchment`) so the line drawings
+read like framed prints; their strokes use `--ink-on-light`.
 
 Fonts are declared alongside the palette:
 
@@ -131,7 +131,7 @@ wordmark and UI (`--track-logo`, `--track-ui`) sits next to them.
 
 - Semantic landmarks, one `h1` per page, ordered headings.
 - Alt text on every meaningful image; decorative artwork is `aria-hidden`.
-- Focus states are visible everywhere, in champagne gold.
+- Focus states are visible everywhere, in honey ochre.
 - The mobile menu and bag drawer trap focus, close on `Esc`, and return focus
   to their trigger.
 - `prefers-reduced-motion` removes all movement, keeping state changes.
@@ -152,11 +152,11 @@ rebuilt in vanilla HTML/CSS to stay on-palette and dependency-free:
   Below 960px the standard card grid shows instead.
 - **Editorial finishing** — index numbers on product cards, a hairline
   ornament under centred section heads, and an invitation-style hairline
-  border inside the garnet signature strip.
-- **After Dark atmosphere** — scrolling marquee announcement bar (static
-  and centred under `prefers-reduced-motion`), a 5% film-grain overlay,
-  a champagne-to-rose gradient on italic headline accents, and a blurred
-  translucent sticky header.
+  border inside the chestnut signature strip.
+- **Daylight atmosphere** — scrolling marquee announcement bar (static
+  and centred under `prefers-reduced-motion`), a subtle film-grain paper
+  texture, a honey-to-terracotta gradient on italic headline accents, and a
+  blurred translucent sticky header.
 
 ## Shopify theme
 
