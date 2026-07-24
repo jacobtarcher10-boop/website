@@ -38,7 +38,7 @@ shopify-theme/
 │   ├── collection.json     → main-collection (native filters + sort)
 │   ├── cart.json, page.json, search.json, blog.json, article.json,
 │   ├── list-collections.json, 404.json
-│   ├── gift_card.liquid, password.liquid
+│   ├── gift_card.liquid, password.json (→ main-password)
 │   └── customers/          login, register, account, order, addresses,
 │                           reset_password, activate_account
 ├── sections/
