@@ -1,0 +1,27 @@
+<div class="container section" style="max-width:34rem">
+  <h1 style="text-align:center">{{ 'customer.login.title' | t }}</h1>
+
+  {%- form 'customer_login', class: 'account-form' -%}
+    {{ form.errors | default_errors }}
+    <label for="customer-email">Email</label>
+    <input type="email" name="customer[email]" id="customer-email" autocomplete="email" required>
+    {%- if form.password_needed -%}
+      <label for="customer-password">Password</label>
+      <input type="password" name="customer[password]" id="customer-password" autocomplete="current-password" required>
+      <a href="#recover" onclick="document.getElementById('recover').hidden=false;return false;">Forgot password?</a>
+    {%- endif -%}
+    <button class="btn btn--primary btn--full" type="submit">Sign in</button>
+  {%- endform -%}
+
+  <div id="recover" hidden>
+    {%- form 'recover_customer_password', class: 'account-form' -%}
+      {{ form.errors | default_errors }}
+      {%- if form.posted_successfully? -%}<p class="newsletter-note">We’ve sent you an email with a link to reset your password.</p>{%- endif -%}
+      <label for="recover-email">Email</label>
+      <input type="email" name="email" id="recover-email" autocomplete="email" required>
+      <button class="btn btn--ghost btn--full" type="submit">Reset password</button>
+    {%- endform -%}
+  </div>
+
+  <p style="text-align:center;margin-top:1.5rem"><a href="{{ routes.account_register_url }}">Create an account</a></p>
+</div>

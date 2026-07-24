@@ -1,0 +1,71 @@
+{%- comment -%}
+  Sticky header: menu (mobile) · logo · centred nav · search/account/bag.
+  Nav is driven by the linklist chosen in the theme editor (default: main-menu).
+{%- endcomment -%}
+<header class="site-header">
+  <div class="container header-inner">
+    <button class="icon-btn menu-btn" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="{{ 'general.accessibility.open_menu' | t }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+
+    <a class="logo" href="{{ routes.root_url }}">{{ shop.name }}</a>
+
+    <nav class="primary-nav" aria-label="Main">
+      <ul role="list">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <li>
+            <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.accessibility.search' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 L21 21"/></svg>
+      </a>
+      <a class="icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'general.accessibility.account' | t }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5 C6 15.8 9 14.5 12 14.5 C15 14.5 18 15.8 19.5 20.5"/></svg>
+      </a>
+      <button class="icon-btn" type="button" data-bag-open aria-label="{{ 'general.accessibility.open_bag' | t }}" aria-controls="bag-drawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 8 H19 L18 21 H6 Z"/><path d="M9 10 V6 a3 3 0 0 1 6 0 v4"/></svg>
+        <span class="bag-count" data-bag-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" aria-hidden="true">
+  <div class="mobile-menu-head">
+    <span class="logo" aria-hidden="true">{{ shop.name }}</span>
+    <button class="icon-btn" type="button" data-menu-close aria-label="{{ 'general.accessibility.close_menu' | t }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile main">
+    {%- for link in linklists[section.settings.menu].links -%}
+      <a href="{{ link.url }}"{% if link.url contains '#' %} data-menu-close{% endif %}>{{ link.title }}</a>
+    {%- endfor -%}
+  </nav>
+  <p class="mobile-menu-foot">{{ section.settings.mobile_foot }}</p>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "mobile_foot",
+      "label": "Mobile menu footer note",
+      "default": "Free UK shipping over £50"
+    }
+  ]
+}
+{% endschema %}

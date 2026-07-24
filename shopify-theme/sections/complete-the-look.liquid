@@ -1,0 +1,51 @@
+{%- comment -%}
+  "Complete the look" — up to N related products. Uses Shopify's product
+  recommendations when available (global.js can refresh via
+  /recommendations/products), otherwise falls back to other products from the
+  same collection so it always renders.
+{%- endcomment -%}
+{%- liquid
+  assign limit = section.settings.product_limit | default: 3
+  assign related = null
+  if recommendations.performed and recommendations.products_count > 0
+    assign related = recommendations.products
+  else
+    for c in product.collections
+      if c.products.size > 1
+        assign related = c.products
+        break
+      endif
+    endfor
+  endif
+-%}
+{%- if related != blank -%}
+  <section class="related section" aria-labelledby="related-title-{{ section.id }}"
+    data-recommendations data-product-id="{{ product.id }}" data-limit="{{ limit }}" data-section-id="{{ section.id }}">
+    <div class="container">
+      <div class="section-head">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2 id="related-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+      </div>
+      <div class="product-grid product-grid--3" data-related>
+        {%- assign shown = 0 -%}
+        {%- for p in related -%}
+          {%- if p.id != product.id and shown < limit -%}
+            {% render 'product-card', product: p, index: forloop.index, quickadd: false %}
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Complete the look",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Styled together" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Complete the look" },
+    { "type": "range", "id": "product_limit", "label": "Products shown", "min": 2, "max": 4, "step": 1, "default": 3 }
+  ]
+}
+{% endschema %}

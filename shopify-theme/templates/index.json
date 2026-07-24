@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "hero": { "type": "hero", "settings": {} },
+    "founding-edit": {
+      "type": "founding-edit",
+      "settings": {
+        "eyebrow": "Drop 01 · Spring",
+        "heading": "The founding edit"
+      }
+    },
+    "category-panels": {
+      "type": "category-panels",
+      "blocks": {
+        "dresses": { "type": "panel", "settings": { "heading": "Dresses", "text": "Bias cuts and cowl necks in satin with real weight. £55–70.", "link_text": "Shop dresses", "modifier": "category-panel--dresses", "illustration": "chapel" } },
+        "tops": { "type": "panel", "settings": { "heading": "Going-Out Tops", "text": "Halters, corsets and structure that holds until last orders. £30–40.", "link_text": "Shop tops", "modifier": "category-panel--tops", "illustration": "aria" } }
+      },
+      "block_order": ["dresses", "tops"],
+      "settings": {}
+    },
+    "signature-strip": { "type": "signature-strip", "settings": {} },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "quote": "The first dress under £100 that hangs like it cost three times that. I’ve stopped explaining where it’s from — I just let people guess high.", "name": "Amelia R.", "meta": "The Vesper Dress · UK 10" } },
+        "r2": { "type": "review", "settings": { "quote": "Wore the Aria to a thirtieth and it didn’t move an inch all night. Proper boning, proper lacing.", "name": "Deja M.", "meta": "The Aria Top · UK 14" } },
+        "r3": { "type": "review", "settings": { "quote": "Ordered Thursday, wedding Saturday. The Chapel arrived Friday, steamed out in ten minutes, and photographed like liquid.", "name": "Sophie L.", "meta": "The Chapel Dress · UK 8" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {}
+    },
+    "brand-story": { "type": "brand-story", "settings": {} },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "founding-edit", "category-panels", "signature-strip", "reviews", "brand-story", "newsletter"]
+}

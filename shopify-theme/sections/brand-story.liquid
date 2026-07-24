@@ -1,0 +1,22 @@
+<section class="story section" id="story" aria-labelledby="story-title-{{ section.id }}">
+  <div class="container story-inner" data-reveal>
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2 id="story-title-{{ section.id }}">{{ section.settings.heading }} <span class="accent-italic">{{ section.settings.heading_accent }}</span></h2>
+    {{ section.settings.body }}
+    {%- if section.settings.signature != blank -%}<p class="story-signature">{{ section.settings.signature }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand story",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Her name. His name." },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent (italic)", "default": "One label." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Rose Archer began with a wardrobe complaint: everything worth wearing on the nights that matter was either built badly or priced absurdly. Olivia designs; Jacob runs everything else. We cut small, considered drops instead of endless collections, in fabrics we’d want against our own skin, sized UK 6 to 16 and fitted on real bodies.</p><p>When a piece sells out, we don’t remake it. We’d rather you loved something rare than liked something everywhere.</p>" },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "— Olivia & Jacob" }
+  ],
+  "presets": [{ "name": "Brand story" }]
+}
+{% endschema %}

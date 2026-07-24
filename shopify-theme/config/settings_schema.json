@@ -1,0 +1,59 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Rose Archer — After Dark",
+    "theme_version": "1.0.0",
+    "theme_author": "Rose Archer",
+    "theme_documentation_url": "https://github.com/jacobtarcher10-boop/website",
+    "theme_support_url": "https://github.com/jacobtarcher10-boop/website/issues"
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      {
+        "type": "header",
+        "content": "After Dark palette"
+      },
+      {
+        "type": "paragraph",
+        "content": "The nocturnal theme. Illustration cards stay light on purpose so line art reads like framed prints; those tones are fixed in the stylesheet."
+      },
+      { "type": "color", "id": "color_bg", "label": "Background (noir)", "default": "#141017" },
+      { "type": "color", "id": "color_surface", "label": "Surface / cards", "default": "#1E1721" },
+      { "type": "color", "id": "color_text", "label": "Text (candlelight ivory)", "default": "#F5EDE3" },
+      { "type": "color", "id": "color_accent", "label": "Accent fill (garnet)", "default": "#7E2B3A" },
+      { "type": "color", "id": "color_accent_strong", "label": "Accent hover", "default": "#64202D" },
+      { "type": "color", "id": "color_rose", "label": "Links & prices (rose)", "default": "#C9909A" },
+      { "type": "color", "id": "color_gold", "label": "Detail (champagne)", "default": "#D5B78C" },
+      { "type": "color", "id": "color_wine", "label": "Gradient panel", "default": "#3A2130" },
+      { "type": "color", "id": "color_wine_soft", "label": "Gradient panel, soft", "default": "#2A1B26" },
+      { "type": "color", "id": "color_muted", "label": "Secondary text", "default": "#A79DA4" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Fonts load from Google Fonts (Fraunces for display, Outfit for UI). To change them, edit the font link and the two font variables in layout/theme.liquid."
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Open the slide-out bag when an item is added",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free UK shipping threshold (in your store currency, whole units)",
+        "default": 50
+      }
+    ]
+  }
+]

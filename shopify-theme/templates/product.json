@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-product", "settings": {} },
+    "complete-the-look": { "type": "complete-the-look", "settings": {} }
+  },
+  "order": ["main", "complete-the-look"]
+}

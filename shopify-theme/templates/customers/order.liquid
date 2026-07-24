@@ -1,0 +1,13 @@
+<div class="container section">
+  <span class="eyebrow">Order {{ order.name }}</span>
+  <h1>Placed {{ order.created_at | date: '%d %B %Y' }}</h1>
+  <table class="fit-table" style="margin-top:2rem">
+    <thead><tr><th scope="col">Item</th><th scope="col">Qty</th><th scope="col">Total</th></tr></thead>
+    <tbody>
+      {%- for line in order.line_items -%}
+        <tr><th scope="row">{{ line.title }}</th><td>{{ line.quantity }}</td><td>{{ line.final_line_price | money }}</td></tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+  <p class="bag-subtotal" style="margin-top:1.5rem"><span>{{ 'sections.cart.subtotal' | t }}</span><span>{{ order.total_net_amount | money }}</span></p>
+</div>

@@ -1,0 +1,23 @@
+<div class="container section">
+  <header class="collection-head" data-reveal>
+    <h1>{{ page_title }}</h1>
+  </header>
+  <div class="product-grid product-grid--3">
+    {%- for collection in collections -%}
+      <article class="product-card" data-reveal>
+        <a class="card-media-link" href="{{ collection.url }}">
+          <figure class="product-media media--blush">
+            {%- if collection.featured_image -%}{{ collection.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', alt: collection.title }}{%- endif -%}
+          </figure>
+        </a>
+        <div class="card-info">
+          <h2 class="card-name"><a href="{{ collection.url }}">{{ collection.title }}</a></h2>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "List collections", "settings": [] }
+{% endschema %}

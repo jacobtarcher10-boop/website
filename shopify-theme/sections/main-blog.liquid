@@ -1,0 +1,24 @@
+<div class="container section">
+  <header class="collection-head" data-reveal>
+    <h1>{{ blog.title }}</h1>
+  </header>
+  <div class="product-grid product-grid--3">
+    {%- for article in blog.articles -%}
+      <article class="product-card" data-reveal>
+        <a class="card-media-link" href="{{ article.url }}">
+          <figure class="product-media media--blush">
+            {%- if article.image -%}{{ article.image | image_url: width: 720 | image_tag: loading: 'lazy', alt: article.title }}{%- endif -%}
+          </figure>
+        </a>
+        <div class="card-info">
+          <span class="card-num" aria-hidden="true">{{ article.published_at | date: '%d.%m' }}</span>
+          <h2 class="card-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

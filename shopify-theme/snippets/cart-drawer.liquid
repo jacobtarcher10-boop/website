@@ -1,0 +1,54 @@
+{%- comment -%}
+  Slide-out bag. Rendered from the live `cart` object; assets/global.js keeps
+  it in sync via the Shopify Cart AJAX API (/cart/add.js, /cart/change.js).
+{%- endcomment -%}
+<div class="scrim" data-scrim></div>
+
+<aside class="bag-drawer" id="bag-drawer" aria-label="{{ 'sections.cart.title' | t }}" aria-hidden="true" data-cart-drawer>
+  <div class="bag-head">
+    <h2>{{ 'sections.cart.title' | t }} <span class="visually-hidden">contains </span>(<span data-bag-count>{{ cart.item_count }}</span>)</h2>
+    <button class="icon-btn" type="button" data-bag-close aria-label="{{ 'general.accessibility.close_bag' | t }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+    </button>
+  </div>
+
+  <p class="bag-shipping" data-bag-shipping{% if cart.item_count == 0 %} hidden{% endif %} aria-live="polite"></p>
+
+  <ul class="bag-items" role="list" data-bag-items>
+    {%- for item in cart.items -%}
+      <li class="bag-item" data-line-key="{{ item.key }}">
+        <div class="bag-item-media">
+          {%- if item.image -%}
+            {{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', alt: item.product.title }}
+          {%- endif -%}
+        </div>
+        <div>
+          <p class="bag-item-name">{{ item.product.title }}</p>
+          <p class="bag-item-meta">{{ item.variant.title }}</p>
+          <div class="bag-qty">
+            <button type="button" data-qty-down aria-label="Decrease quantity of {{ item.product.title | escape }}">&minus;</button>
+            <span aria-live="polite">{{ item.quantity }}</span>
+            <button type="button" data-qty-up aria-label="Increase quantity of {{ item.product.title | escape }}">+</button>
+          </div>
+        </div>
+        <div>
+          <p class="bag-item-price">{{ item.final_line_price | money }}</p>
+          <button type="button" class="bag-item-remove" data-qty-remove aria-label="Remove {{ item.product.title | escape }} from bag">{{ 'sections.cart.remove' | t }}</button>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  <div class="bag-empty" data-bag-empty{% if cart.item_count > 0 %} hidden{% endif %}>
+    <p>{{ 'sections.cart.empty' | t }}</p>
+    <a class="btn btn--ghost" href="{{ routes.all_products_collection_url }}" data-bag-close>{{ 'sections.cart.continue' | t }}</a>
+  </div>
+
+  <div class="bag-foot" data-bag-foot{% if cart.item_count == 0 %} hidden{% endif %}>
+    <p class="bag-subtotal"><span>{{ 'sections.cart.subtotal' | t }}</span> <span data-bag-subtotal>{{ cart.total_price | money }}</span></p>
+    <p class="bag-note">{{ 'sections.cart.shipping_note' | t }}</p>
+    <form action="{{ routes.cart_url }}" method="post">
+      <button class="btn btn--primary btn--full" type="submit" name="checkout">{{ 'sections.cart.checkout' | t }}</button>
+    </form>
+  </div>
+</aside>

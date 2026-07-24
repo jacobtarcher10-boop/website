@@ -1,0 +1,49 @@
+<section class="section" aria-labelledby="reviews-title-{{ section.id }}">
+  <div class="container">
+    <div class="section-head section-head--centre">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 id="reviews-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="reviews-grid">
+      {%- for block in section.blocks -%}
+        <figure class="review" data-reveal {{ block.shopify_attributes }}>
+          <svg class="review-quote-mark" viewBox="0 0 48 32" aria-hidden="true"><use href="#quote-mark"/></svg>
+          <blockquote><p>{{ block.settings.quote }}</p></blockquote>
+          <figcaption>{{ block.settings.name }} <span>{{ block.settings.meta }}</span></figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Word of mouth" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Worn, and vouched for" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The first dress under £100 that hangs like it cost three times that." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Amelia R." },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "The Vesper Dress · UK 10" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review", "settings": { "quote": "Proper boning, proper lacing. My House of CB one can sit this one out.", "name": "Deja M.", "meta": "The Aria Top · UK 14" } },
+        { "type": "review", "settings": { "quote": "Ordered Thursday, wedding Saturday. It arrived Friday and photographed like liquid.", "name": "Sophie L.", "meta": "The Chapel Dress · UK 8" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

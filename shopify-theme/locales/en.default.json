@@ -1,0 +1,81 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "search": "Search",
+      "account": "Account",
+      "open_bag": "Open bag",
+      "close_bag": "Close bag"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search the drop",
+      "no_results": "Nothing matched “{{ terms }}”.",
+      "results_with_count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      }
+    },
+    "404": {
+      "title": "This piece has slipped away",
+      "subtext": "The page you were after has moved or sold through. The drop is still waiting.",
+      "link": "Return to the drop"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "newsletter": {
+      "success": "You’re on the list. We’ll be quiet until it matters."
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      }
+    },
+    "cart": {
+      "title": "Your bag",
+      "empty": "Your bag is empty — for now.",
+      "continue": "Shop the drop",
+      "subtotal": "Subtotal",
+      "shipping_note": "Shipping calculated at checkout · 14-day returns",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "free_shipping_reached": "Your order ships free within the UK.",
+      "free_shipping_remaining": "You are {{ amount }} from free UK shipping."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_bag": "Add to bag",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "select_size": "Select a size first.",
+      "size_guide": "Size guide",
+      "on_sale": "Sale"
+    },
+    "facets": {
+      "sort_by": "Sort",
+      "filter": "Filter",
+      "clear": "Clear filters",
+      "size": "Size",
+      "colour": "Colour",
+      "price": "Price",
+      "results": {
+        "one": "{{ count }} piece",
+        "other": "{{ count }} pieces"
+      }
+    }
+  },
+  "customer": {
+    "account": { "title": "Account" },
+    "login": { "title": "Login" }
+  }
+}

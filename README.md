@@ -158,12 +158,22 @@ rebuilt in vanilla HTML/CSS to stay on-palette and dependency-free:
   a champagne-to-rose gradient on italic headline accents, and a blurred
   translucent sticky header.
 
-## Porting to Shopify later
+## Shopify theme
 
-- Each commented section of the pages maps to a Shopify **section**; the
-  product cards map to a snippet.
-- `PRODUCTS` in `js/main.js` is the shape of the data Liquid will supply
-  (`product.title`, `product.price`, `product.options`, metafields for the
-  measurements table).
-- The bag drawer's `addToBag / renderBag` functions are the seam where the
-  Cart AJAX API replaces the in-memory array.
+A working Online Store 2.0 theme port lives in **`shopify-theme/`** — uploadable
+via the Shopify CLI or a zip. It shares this project's CSS and renders real
+Shopify data (products, variants, collections, cart, search) through Liquid
+sections, JSON templates, a settings schema and locales. See
+[`shopify-theme/README.md`](shopify-theme/README.md) for install steps and the
+product metafields the design expects.
+
+The static site here remains the design reference; the theme is the deployable
+storefront. Mapping, in brief:
+
+- Each commented section of these pages maps to a Shopify **section**; the
+  product cards map to `snippets/product-card.liquid`.
+- `PRODUCTS` in `js/main.js` corresponds to the data Liquid supplies
+  (`product.title`, `product.price`, `product.options`, and `custom.*`
+  metafields for the measurements table and copy).
+- The in-memory bag here is replaced by the **Cart AJAX API** in
+  `shopify-theme/assets/global.js`.

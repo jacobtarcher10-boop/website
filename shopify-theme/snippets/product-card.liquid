@@ -1,0 +1,72 @@
+{%- comment -%}
+  Product card.
+  Params:
+    product  (required) — a Shopify product object
+    index    (optional) — 1-based number shown as the editorial index
+    quickadd (optional, default true) — show the hover quick-add
+  Shows the product's featured image when it has one; otherwise falls back to
+  a line-illustration placeholder keyed by the product's `illustration`
+  metafield (custom.illustration = vesper|chapel|encore|aria), then to a plain
+  tinted panel.
+{%- endcomment -%}
+{%- liquid
+  assign quickadd = quickadd | default: true, allow_false: true
+  assign illo = product.metafields.custom.illustration | default: ''
+  assign tone = product.metafields.custom.card_tone | default: 'media--blush'
+-%}
+<article class="product-card" data-product-id="{{ product.id }}">
+  <a class="card-media-link" href="{{ product.url }}">
+    <figure class="product-media {{ tone }}">
+      {%- if product.featured_media -%}
+        {{ product.featured_media | image_url: width: 720 | image_tag:
+            loading: 'lazy',
+            widths: '360, 540, 720',
+            sizes: '(min-width: 960px) 25vw, 50vw',
+            alt: product.featured_media.alt | default: product.title }}
+      {%- elsif illo != blank -%}
+        <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of {{ product.title | escape }}">
+          <use href="#illo-{{ illo }}"/>
+        </svg>
+      {%- endif -%}
+    </figure>
+  </a>
+
+  {%- if product.available == false -%}
+    <p class="card-flag">{{ 'products.product.sold_out' | t }}</p>
+  {%- elsif product.metafields.custom.flag != blank -%}
+    <p class="card-flag">{{ product.metafields.custom.flag }}</p>
+  {%- endif -%}
+
+  {%- if quickadd and product.available -%}
+    <div class="card-quickadd" data-quickadd data-product-handle="{{ product.handle }}">
+      {%- assign size_option = null -%}
+      {%- for option in product.options_with_values -%}
+        {%- assign dn = option.name | downcase -%}
+        {%- if dn contains 'size' -%}{%- assign size_option = option -%}{%- endif -%}
+      {%- endfor -%}
+      <button class="quickadd-toggle" type="button" aria-expanded="false">{{ 'products.product.add_to_bag' | t }}</button>
+      <div class="quickadd-sizes" hidden>
+        <span class="quickadd-label" aria-hidden="true">{{ 'products.facets.size' | t }}</span>
+        {%- for variant in product.variants -%}
+          {%- if variant.available -%}
+            <button type="button" data-variant-id="{{ variant.id }}"
+              aria-label="Add {{ product.title | escape }}, {{ variant.title | escape }}, to bag">
+              {%- if size_option -%}{{ variant.options[size_option.position | minus: 1] }}{%- else -%}{{ variant.title }}{%- endif -%}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="card-info">
+    {%- if index -%}<span class="card-num" aria-hidden="true">{{ index | prepend: '0' | slice: -2, 2 }}</span>{%- endif -%}
+    <h3 class="card-name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    {%- if product.metafields.custom.subtitle != blank -%}
+      <p class="card-meta">{{ product.metafields.custom.subtitle }}</p>
+    {%- elsif product.type != blank -%}
+      <p class="card-meta">{{ product.type }}</p>
+    {%- endif -%}
+    {% render 'price', price: product.price %}
+  </div>
+</article>

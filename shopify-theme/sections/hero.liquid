@@ -1,0 +1,80 @@
+<section class="hero" aria-labelledby="hero-title-{{ section.id }}">
+  <div class="container hero-inner">
+    <div class="hero-copy" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h1 id="hero-title-{{ section.id }}">{{ section.settings.heading }} <span class="accent-italic">{{ section.settings.heading_accent }}</span></h1>
+      {%- if section.settings.body != blank -%}<p class="lede">{{ section.settings.body }}</p>{%- endif -%}
+      <div class="hero-ctas">
+        {%- if section.settings.cta1_text != blank -%}<a class="btn btn--primary" href="{{ section.settings.cta1_link }}">{{ section.settings.cta1_text }}</a>{%- endif -%}
+        {%- if section.settings.cta2_text != blank -%}<a class="btn btn--ghost" href="{{ section.settings.cta2_link }}">{{ section.settings.cta2_text }}</a>{%- endif -%}
+      </div>
+    </div>
+
+    <div class="hero-visual" data-reveal>
+      <div class="hero-collage">
+        <span class="hero-wash" aria-hidden="true"></span>
+        <div class="hero-frame hero-frame--main">
+          {%- assign feat = section.settings.featured_product -%}
+          <figure class="product-media media--blush">
+            {%- if feat != blank and feat.featured_media -%}
+              {{ feat.featured_media | image_url: width: 720 | image_tag: widths: '360, 540, 720', sizes: '(min-width: 960px) 30vw, 90vw', alt: feat.title }}
+            {%- else -%}
+              <svg viewBox="0 0 360 480" role="img" aria-label="{{ section.settings.image_alt | default: 'Featured garment illustration' }}"><use href="#illo-{{ section.settings.illustration }}"/></svg>
+            {%- endif -%}
+          </figure>
+          {%- if feat != blank -%}
+            <p class="hero-caption"><span>{{ feat.title }}</span> <span>{{ feat.price | money }}</span></p>
+          {%- elsif section.settings.caption_name != blank -%}
+            <p class="hero-caption"><span>{{ section.settings.caption_name }}</span> <span>{{ section.settings.caption_price }}</span></p>
+          {%- endif -%}
+        </div>
+        <div class="hero-frame hero-frame--detail" aria-hidden="true">
+          <figure class="product-media media--blush-soft">
+            <svg viewBox="0 0 360 480"><use href="#illo-{{ section.settings.illustration_detail }}"/></svg>
+          </figure>
+        </div>
+        {%- if section.settings.vertical_caption != blank -%}<span class="hero-vertical" aria-hidden="true">{{ section.settings.vertical_caption }}</span>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Rose Archer · The founding drop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Dressed for" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent (italic)", "default": "the nights that count." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Occasion dresses and going-out tops, released in small limited drops. Fabric that hangs properly, fit that was actually fitted — at prices that don’t need a payday. When a piece is gone, it’s gone." },
+    { "type": "text", "id": "cta1_text", "label": "Button 1 text", "default": "Shop dresses" },
+    { "type": "url", "id": "cta1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "cta2_text", "label": "Button 2 text", "default": "Shop tops" },
+    { "type": "url", "id": "cta2_link", "label": "Button 2 link" },
+    { "type": "header", "content": "Featured visual" },
+    { "type": "product", "id": "featured_product", "label": "Featured product (uses its image if set)" },
+    { "type": "text", "id": "vertical_caption", "label": "Vertical caption", "default": "Drop 01 · Spring" },
+    { "type": "text", "id": "caption_name", "label": "Fallback caption name", "default": "The Vesper Dress" },
+    { "type": "text", "id": "caption_price", "label": "Fallback caption price", "default": "£64" },
+    {
+      "type": "select", "id": "illustration", "label": "Placeholder illustration", "default": "vesper",
+      "options": [
+        { "value": "vesper", "label": "Vesper (cowl dress)" },
+        { "value": "chapel", "label": "Chapel (column dress)" },
+        { "value": "encore", "label": "Encore (halter top)" },
+        { "value": "aria", "label": "Aria (corset top)" }
+      ]
+    },
+    {
+      "type": "select", "id": "illustration_detail", "label": "Placeholder detail illustration", "default": "vesper-detail",
+      "options": [
+        { "value": "vesper-detail", "label": "Vesper detail" },
+        { "value": "chapel-detail", "label": "Chapel detail" },
+        { "value": "encore-detail", "label": "Encore detail" },
+        { "value": "aria-detail", "label": "Aria detail" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
