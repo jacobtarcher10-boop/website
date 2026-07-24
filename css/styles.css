@@ -745,7 +745,8 @@ input::placeholder {
 }
 
 /* Short hairline ornament beneath centred heads — invitation-card cadence */
-.section-head--centre h2::after {
+.section-head--centre h2::after,
+.collection-head h1::after {
   content: "";
   display: block;
   width: 2.75rem;
