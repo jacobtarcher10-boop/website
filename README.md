@@ -88,32 +88,39 @@ Two further places to update once all photography exists:
 
 ## Changing colours & fonts
 
-The whole palette is defined once, at the top of `css/styles.css`:
+The whole palette — the "After Dark" nocturnal theme — is defined once, at
+the top of `css/styles.css`:
 
 ```css
 :root {
-  --bone:            #F6F2EA;  /* main background */
-  --bone-light:      #FBF8F2;  /* cards & panels */
-  --espresso:        #2B211B;  /* text & logo */
-  --oxblood:         #5E2129;  /* signature accent */
-  --oxblood-pressed: #471820;  /* hover states */
-  --rose:            #C9909A;  /* eyebrows — large/decorative text only */
-  --blush:           #EBD8D4;  /* gradient panels */
-  --blush-soft:      #F2E6E2;  /* gradient panels, softer stop */
-  --smoke:           #8D8680;  /* dividers & large secondary text only */
+  --bg:            #141017;  /* main background — aubergine noir */
+  --surface:       #1E1721;  /* cards, panels, drawers */
+  --text:          #F5EDE3;  /* primary text — candlelight ivory */
+  --cream:         #F5EDE3;  /* explicit light ink on accent fills */
+  --accent:        #7E2B3A;  /* garnet — buttons, fills, bars */
+  --accent-strong: #64202D;  /* hover / pressed fills */
+  --rose:          #C9909A;  /* standout text: links, prices */
+  --gold:          #D5B78C;  /* champagne — eyebrows, focus rings */
+  --wine:          #3A2130;  /* deep gradient panels */
+  --wine-soft:     #2A1B26;  /* softer gradient stop */
+  --muted:         #A79DA4;  /* secondary text */
+  --blush:         #E8D3CE;  /* light illustration-card tone */
+  --blush-soft:    #F2E6E2;  /* light illustration-card tone, softer */
+  --parchment:     #F0E6D9;  /* light illustration-card tone, warm */
+  --ink-on-light:  #2B211B;  /* strokes/text on the light cards */
 }
 ```
 
 Change a value there and it changes everywhere — buttons, links, focus rings,
-gradients, the bag drawer, the lot. Two contrast notes, also commented in the
-CSS: `--rose` and `--smoke` do **not** meet WCAG AA against bone at body-text
-sizes, so keep them to large or decorative type.
+gradients, the bag drawer, the lot. The illustration cards deliberately stay
+light (`--blush`, `--blush-soft`, `--parchment`) so the line drawings read
+like framed prints against the dark page; their strokes use `--ink-on-light`.
 
 Fonts are declared alongside the palette:
 
 ```css
---font-display: "Cormorant Garamond", "Times New Roman", serif;
---font-body:    "Jost", "Century Gothic", sans-serif;
+--font-display: "Fraunces", "Times New Roman", serif;
+--font-body:    "Outfit", "Century Gothic", sans-serif;
 ```
 
 To change typefaces, update the Google Fonts `<link>` in the `<head>` of each
@@ -124,7 +131,7 @@ wordmark and UI (`--track-logo`, `--track-ui`) sits next to them.
 
 - Semantic landmarks, one `h1` per page, ordered headings.
 - Alt text on every meaningful image; decorative artwork is `aria-hidden`.
-- Focus states are visible everywhere, in oxblood (bone on dark surfaces).
+- Focus states are visible everywhere, in champagne gold.
 - The mobile menu and bag drawer trap focus, close on `Esc`, and return focus
   to their trigger.
 - `prefers-reduced-motion` removes all movement, keeping state changes.
@@ -145,7 +152,11 @@ rebuilt in vanilla HTML/CSS to stay on-palette and dependency-free:
   Below 960px the standard card grid shows instead.
 - **Editorial finishing** — index numbers on product cards, a hairline
   ornament under centred section heads, and an invitation-style hairline
-  border inside the oxblood signature strip.
+  border inside the garnet signature strip.
+- **After Dark atmosphere** — scrolling marquee announcement bar (static
+  and centred under `prefers-reduced-motion`), a 5% film-grain overlay,
+  a champagne-to-rose gradient on italic headline accents, and a blurred
+  translucent sticky header.
 
 ## Porting to Shopify later
 
