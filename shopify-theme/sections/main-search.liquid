@@ -1,0 +1,29 @@
+<div class="container section">
+  <header class="collection-head" data-reveal>
+    <h1>{{ 'general.search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="newsletter-form" style="max-width:34rem;margin-inline:auto">
+      <label class="visually-hidden" for="search-input">{{ 'general.search.title' | t }}</label>
+      <input id="search-input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off">
+      <button type="submit">{{ 'general.accessibility.search' | t }}</button>
+    </form>
+  </header>
+
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 -%}
+      <p class="results-count" style="text-align:center;margin-bottom:2rem">{{ 'general.search.results_with_count' | t: count: search.results_count }}</p>
+      <div class="product-grid product-grid--3">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item, index: forloop.index %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="no-results"><p>{{ 'general.search.no_results' | t: terms: search.terms }}</p></div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

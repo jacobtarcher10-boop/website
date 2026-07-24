@@ -1,0 +1,9 @@
+{%- comment -%}
+  Renders a product/variant price.
+  Params: price (required), class (optional extra class)
+{%- endcomment -%}
+<p class="card-price {{ class }}">
+  {%- if price != blank -%}
+    {{ price | money }}
+  {%- endif -%}
+</p>

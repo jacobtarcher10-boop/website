@@ -211,6 +211,10 @@
     if (!openPanel) return;
     openPanel.classList.remove('is-open');
     openPanel.setAttribute('aria-hidden', 'true');
+    // If the closing panel was the mobile menu, sync the hamburger state
+    if (openPanel.id === 'mobile-menu' && menuBtn) {
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
     openPanel = null;
     if (!keepScrim) {
       if (scrim) scrim.classList.remove('is-visible');
@@ -253,13 +257,11 @@
       open(mobileMenu);
       menuBtn.setAttribute('aria-expanded', 'true');
     });
-    var menuClose = qs('[data-menu-close]', mobileMenu);
-    if (menuClose) {
-      menuClose.addEventListener('click', function () {
-        close();
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    }
+    // Close button and any in-menu links marked data-menu-close
+    // (same-page anchors don't reload, so the menu must close itself)
+    qsa('[data-menu-close]').forEach(function (el) {
+      el.addEventListener('click', function () { close(); });
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -412,8 +414,9 @@
     });
   });
 
-  var bagClose = qs('[data-bag-close]');
-  if (bagClose) bagClose.addEventListener('click', function () { close(); });
+  qsa('[data-bag-close]').forEach(function (el) {
+    el.addEventListener('click', function () { close(); });
+  });
 
   renderBag();
 
@@ -457,6 +460,33 @@
       if (firstSize) firstSize.focus();
     });
   });
+
+  /* ------------------------------------------------------------------------
+     The founding edit: quiet-luxury index (homepage, ≥960px)
+     Hovering or focusing a row swaps the featured panel beside the list.
+     ---------------------------------------------------------------------- */
+
+  var showcase = qs('[data-edit-showcase]');
+
+  if (showcase) {
+    var editRows = qsa('[data-edit-item]', showcase);
+    var editPreviews = qsa('[data-edit-preview]', showcase);
+
+    var activateEdit = function (id) {
+      editRows.forEach(function (row) {
+        row.classList.toggle('is-active', row.getAttribute('data-edit-item') === id);
+      });
+      editPreviews.forEach(function (panel) {
+        panel.classList.toggle('is-active', panel.getAttribute('data-edit-preview') === id);
+      });
+    };
+
+    editRows.forEach(function (row) {
+      var id = row.getAttribute('data-edit-item');
+      row.addEventListener('mouseenter', function () { activateEdit(id); });
+      row.addEventListener('focus', function () { activateEdit(id); });
+    });
+  }
 
   /* ------------------------------------------------------------------------
      Accordions (product page)
@@ -702,10 +732,11 @@
     var relatedWrap = qs('[data-related]', productRoot.ownerDocument);
     if (relatedWrap) {
       relatedWrap.innerHTML = '';
-      product.related.forEach(function (id) {
+      product.related.forEach(function (id, i) {
         var rel = PRODUCTS[id];
         var article = document.createElement('article');
         article.className = 'product-card';
+        article.setAttribute('data-reveal', '');
 
         var link = document.createElement('a');
         link.className = 'card-media-link';
@@ -716,6 +747,11 @@
 
         var info = document.createElement('div');
         info.className = 'card-info';
+        var num = document.createElement('span');
+        num.className = 'card-num';
+        num.setAttribute('aria-hidden', 'true');
+        num.textContent = '0' + (i + 1);
+        info.appendChild(num);
         var h3 = document.createElement('h3');
         h3.className = 'card-name';
         var nameLink = document.createElement('a');
@@ -868,5 +904,32 @@
   qsa('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
+
+  /* ------------------------------------------------------------------------
+     Fade-up reveals on scroll
+     Armed last so it also observes cards the code above has re-rendered
+     (e.g. Complete the look). Only runs when IntersectionObserver exists
+     and the user hasn't asked for reduced motion; otherwise content is
+     simply visible.
+     ---------------------------------------------------------------------- */
+
+  var revealTargets = qsa('[data-reveal]');
+
+  if (
+    revealTargets.length &&
+    'IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    document.body.classList.add('has-reveal');
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealTargets.forEach(function (el) { revealObserver.observe(el); });
+  }
 
 })();

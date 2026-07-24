@@ -1,0 +1,30 @@
+<div class="container section">
+  <div class="section-head section-head--split">
+    <div><span class="eyebrow">{{ 'customer.account.title' | t }}</span><h1>{{ customer.name | default: customer.email }}</h1></div>
+    <a class="text-link" href="{{ routes.account_logout_url }}">Sign out</a>
+  </div>
+
+  <h2 style="font-size:1.5rem;margin-bottom:1.5rem">Order history</h2>
+  {%- paginate customer.orders by 12 -%}
+    {%- if customer.orders.size > 0 -%}
+      <table class="fit-table">
+        <thead><tr><th scope="col">Order</th><th scope="col">Date</th><th scope="col">Total</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          {%- for order in customer.orders -%}
+            <tr>
+              <th scope="row"><a href="{{ order.customer_url }}">{{ order.name }}</a></th>
+              <td>{{ order.created_at | date: '%d %b %Y' }}</td>
+              <td>{{ order.total_net_amount | money }}</td>
+              <td>{{ order.financial_status_label }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+      {%- if paginate.pages > 1 -%}<nav class="pagination">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- else -%}
+      <p>No orders yet.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+
+  <p style="margin-top:2rem"><a class="text-link" href="{{ routes.account_addresses_url }}">Manage addresses ({{ customer.addresses_count }})</a></p>
+</div>

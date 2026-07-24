@@ -1,0 +1,109 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Rose Archer — Daylight",
+    "theme_version": "1.0.0",
+    "theme_author": "Rose Archer",
+    "theme_documentation_url": "https://github.com/jacobtarcher10-boop/website",
+    "theme_support_url": "https://github.com/jacobtarcher10-boop/website/issues"
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Daylight palette"
+      },
+      {
+        "type": "paragraph",
+        "content": "The warm Daylight palette. Illustration cards sit a shade warmer than the page so line art reads like framed prints; those tones are fixed in the stylesheet."
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background (warm oat)",
+        "default": "#F4ECDD"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface / cards (ivory)",
+        "default": "#FCF7EE"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text (espresso brown)",
+        "default": "#3A2B1E"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent fill (chestnut)",
+        "default": "#7C4A24"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_strong",
+        "label": "Accent hover",
+        "default": "#613718"
+      },
+      {
+        "type": "color",
+        "id": "color_rose",
+        "label": "Links & prices (terracotta)",
+        "default": "#A24B26"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "Detail (honey)",
+        "default": "#9A6A24"
+      },
+      {
+        "type": "color",
+        "id": "color_wine",
+        "label": "Gradient panel (honey sand)",
+        "default": "#EBD9B8"
+      },
+      {
+        "type": "color",
+        "id": "color_wine_soft",
+        "label": "Gradient panel, soft (butter)",
+        "default": "#F3E8D2"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Secondary text (taupe)",
+        "default": "#6E5C46"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Fonts load from Google Fonts (Fraunces for display, Outfit for UI). To change them, edit the font link and the two font variables in layout/theme.liquid."
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Open the slide-out bag when an item is added",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free UK shipping threshold (in your store currency, whole units)",
+        "default": 50
+      }
+    ]
+  }
+]

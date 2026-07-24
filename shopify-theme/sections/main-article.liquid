@@ -1,0 +1,16 @@
+<article class="container section">
+  <div class="story-inner" data-reveal>
+    <span class="eyebrow">{{ article.published_at | date: '%B %Y' }}</span>
+    <h1>{{ article.title }}</h1>
+  </div>
+  {%- if article.image -%}
+    <figure class="product-media media--blush" style="max-width:48rem;margin:2.5rem auto;aspect-ratio:16/9">
+      {{ article.image | image_url: width: 1200 | image_tag: alt: article.title }}
+    </figure>
+  {%- endif -%}
+  <div class="story-inner accordion-body" style="font-size:1rem;text-align:left">{{ article.content }}</div>
+</article>
+
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

@@ -21,8 +21,10 @@ python3 -m http.server 8000
 ## File structure
 
 ```
-├── index.html        Homepage — hero, founding edit, categories, signature
-│                     strip, reviews, story, email capture
+├── index.html        Homepage — editorial collage hero, founding edit
+│                     (numbered index with hover-swap preview on desktop,
+│                     card grid below 960px), categories, signature strip,
+│                     reviews, story, email capture
 ├── collection.html   Collection template — filter bar (size / colour / price),
 │                     sort dropdown, responsive grid.
 │                     Accepts ?cat=dresses or ?cat=tops to pre-filter.
@@ -86,32 +88,39 @@ Two further places to update once all photography exists:
 
 ## Changing colours & fonts
 
-The whole palette is defined once, at the top of `css/styles.css`:
+The whole palette — the "Daylight" warm theme — is defined once, at
+the top of `css/styles.css`:
 
 ```css
 :root {
-  --bone:            #F6F2EA;  /* main background */
-  --bone-light:      #FBF8F2;  /* cards & panels */
-  --espresso:        #2B211B;  /* text & logo */
-  --oxblood:         #5E2129;  /* signature accent */
-  --oxblood-pressed: #471820;  /* hover states */
-  --rose:            #C9909A;  /* eyebrows — large/decorative text only */
-  --blush:           #EBD8D4;  /* gradient panels */
-  --blush-soft:      #F2E6E2;  /* gradient panels, softer stop */
-  --smoke:           #8D8680;  /* dividers & large secondary text only */
+  --bg:            #F4ECDD;  /* main background — warm oat cream */
+  --surface:       #FCF7EE;  /* cards, panels, drawers — soft ivory */
+  --text:          #3A2B1E;  /* primary text — deep espresso brown */
+  --cream:         #FCF7EE;  /* light ink on dark accent fills */
+  --accent:        #7C4A24;  /* chestnut — buttons, fills, bars */
+  --accent-strong: #613718;  /* hover / pressed fills */
+  --rose:          #A24B26;  /* standout text: links, prices — terracotta */
+  --gold:          #9A6A24;  /* honey ochre — eyebrows, focus rings */
+  --wine:          #EBD9B8;  /* warm gradient panels — honey sand */
+  --wine-soft:     #F3E8D2;  /* softer gradient stop — pale butter */
+  --muted:         #6E5C46;  /* secondary text — warm taupe */
+  --blush:         #EBDDC7;  /* light illustration-card tone */
+  --blush-soft:    #F3E9D7;  /* light illustration-card tone, softer */
+  --parchment:     #F0E6D3;  /* light illustration-card tone, warm */
+  --ink-on-light:  #3A2B1E;  /* strokes/text on the light cards */
 }
 ```
 
 Change a value there and it changes everywhere — buttons, links, focus rings,
-gradients, the bag drawer, the lot. Two contrast notes, also commented in the
-CSS: `--rose` and `--smoke` do **not** meet WCAG AA against bone at body-text
-sizes, so keep them to large or decorative type.
+gradients, the bag drawer, the lot. The illustration cards sit a shade warmer
+than the page (`--blush`, `--blush-soft`, `--parchment`) so the line drawings
+read like framed prints; their strokes use `--ink-on-light`.
 
 Fonts are declared alongside the palette:
 
 ```css
---font-display: "Cormorant Garamond", "Times New Roman", serif;
---font-body:    "Jost", "Century Gothic", sans-serif;
+--font-display: "Fraunces", "Times New Roman", serif;
+--font-body:    "Outfit", "Century Gothic", sans-serif;
 ```
 
 To change typefaces, update the Google Fonts `<link>` in the `<head>` of each
@@ -122,18 +131,49 @@ wordmark and UI (`--track-logo`, `--track-ui`) sits next to them.
 
 - Semantic landmarks, one `h1` per page, ordered headings.
 - Alt text on every meaningful image; decorative artwork is `aria-hidden`.
-- Focus states are visible everywhere, in oxblood (bone on dark surfaces).
+- Focus states are visible everywhere, in honey ochre.
 - The mobile menu and bag drawer trap focus, close on `Esc`, and return focus
   to their trigger.
 - `prefers-reduced-motion` removes all movement, keeping state changes.
+  The scroll-reveal fades are only armed when the user has *not* asked for
+  reduced motion (and IntersectionObserver exists); otherwise content is
+  simply visible.
 - Breakpoints at 520px, 760px and 960px, mobile-first.
 
-## Porting to Shopify later
+## Design notes
 
-- Each commented section of the pages maps to a Shopify **section**; the
-  product cards map to a snippet.
-- `PRODUCTS` in `js/main.js` is the shape of the data Liquid will supply
-  (`product.title`, `product.price`, `product.options`, metafields for the
-  measurements table).
-- The bag drawer's `addToBag / renderBag` functions are the seam where the
-  Cart AJAX API replaces the in-memory array.
+The homepage uses three editorial patterns adapted from 21st.dev references,
+rebuilt in vanilla HTML/CSS to stay on-palette and dependency-free:
+
+- **Collage hero** — a main framed panel with a smaller overlapping detail
+  frame over a soft blush wash, plus a vertical drop caption.
+- **Quiet-luxury index** (`.edit-showcase`, ≥960px) — the founding edit as a
+  numbered list; hovering or focusing a row cross-fades the featured panel.
+  Below 960px the standard card grid shows instead.
+- **Editorial finishing** — index numbers on product cards, a hairline
+  ornament under centred section heads, and an invitation-style hairline
+  border inside the chestnut signature strip.
+- **Daylight atmosphere** — scrolling marquee announcement bar (static
+  and centred under `prefers-reduced-motion`), a subtle film-grain paper
+  texture, a honey-to-terracotta gradient on italic headline accents, and a
+  blurred translucent sticky header.
+
+## Shopify theme
+
+A working Online Store 2.0 theme port lives in **`shopify-theme/`** — uploadable
+via the Shopify CLI or a zip. It shares this project's CSS and renders real
+Shopify data (products, variants, collections, cart, search) through Liquid
+sections, JSON templates, a settings schema and locales. See
+[`shopify-theme/README.md`](shopify-theme/README.md) for install steps and the
+product metafields the design expects.
+
+The static site here remains the design reference; the theme is the deployable
+storefront. Mapping, in brief:
+
+- Each commented section of these pages maps to a Shopify **section**; the
+  product cards map to `snippets/product-card.liquid`.
+- `PRODUCTS` in `js/main.js` corresponds to the data Liquid supplies
+  (`product.title`, `product.price`, `product.options`, and `custom.*`
+  metafields for the measurements table and copy).
+- The in-memory bag here is replaced by the **Cart AJAX API** in
+  `shopify-theme/assets/global.js`.

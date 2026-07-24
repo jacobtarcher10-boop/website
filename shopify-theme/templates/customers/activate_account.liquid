@@ -1,0 +1,12 @@
+<div class="container section" style="max-width:34rem">
+  <h1 style="text-align:center">Activate account</h1>
+  {%- form 'activate_customer_password', class: 'account-form' -%}
+    {{ form.errors | default_errors }}
+    <label for="activate-password">Password</label>
+    <input type="password" name="customer[password]" id="activate-password" autocomplete="new-password" required>
+    <label for="activate-confirm">Confirm password</label>
+    <input type="password" name="customer[password_confirmation]" id="activate-confirm" autocomplete="new-password" required>
+    <button class="btn btn--primary btn--full" type="submit">Activate</button>
+    <button class="btn btn--ghost btn--full" type="submit" name="decline">Decline</button>
+  {%- endform -%}
+</div>

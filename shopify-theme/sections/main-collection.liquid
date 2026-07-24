@@ -1,0 +1,90 @@
+{%- comment -%}
+  Collection page. Filters and sort use Shopify's native facet system
+  (collection.filters / sort_options) submitted as a GET form, so it works
+  server-side without custom JS. global.js auto-submits on change for polish.
+  Enable which filters appear in Admin → Products → Filters.
+{%- endcomment -%}
+<div class="container">
+  <header class="collection-head" data-reveal>
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}<p>{{ collection.description }}</p>{%- endif -%}
+  </header>
+
+  <form method="get" class="toolbar" data-facet-form>
+    <div class="toolbar-filters">
+      <span class="toolbar-label">{{ 'products.facets.filter' | t }}</span>
+      {%- for filter in collection.filters -%}
+        {%- case filter.type -%}
+          {%- when 'list', 'boolean' -%}
+            <div class="select">
+              <label class="visually-hidden" for="filter-{{ filter.param_name }}">{{ filter.label }}</label>
+              <select id="filter-{{ filter.param_name }}" name="{{ filter.param_name }}" data-auto-submit>
+                <option value="">{{ filter.label }} · All</option>
+                {%- for value in filter.values -%}
+                  <option value="{{ value.value | escape }}"{% if value.active %} selected{% endif %}>{{ value.label }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- when 'price_range' -%}
+            <div class="select">
+              <label class="visually-hidden" for="filter-{{ filter.min_value.param_name }}">Min price</label>
+              <input class="facet-price" type="number" inputmode="decimal" id="filter-{{ filter.min_value.param_name }}" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value }}" placeholder="Min" data-auto-submit>
+            </div>
+            <div class="select">
+              <label class="visually-hidden" for="filter-{{ filter.max_value.param_name }}">Max price</label>
+              <input class="facet-price" type="number" inputmode="decimal" id="filter-{{ filter.max_value.param_name }}" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value }}" placeholder="Max" data-auto-submit>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <p class="results-count" aria-live="polite">{{ 'products.facets.results' | t: count: collection.products_count }}</p>
+
+    <div class="toolbar-sort">
+      <label class="toolbar-label" for="sort">{{ 'products.facets.sort_by' | t }}</label>
+      <div class="select">
+        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+        <select id="sort" name="sort_by" data-auto-submit>
+          {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+      </div>
+    </div>
+
+    <noscript><button class="btn btn--ghost" type="submit">Apply</button></noscript>
+  </form>
+
+  {%- if collection.products.size > 0 -%}
+    {%- paginate collection.products by 12 -%}
+      <div class="product-grid product-grid--3 collection-grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product, index: forloop.index %}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- else -%}
+    <div class="no-results">
+      <p>Nothing in the drop matches those filters — it’s a small drop, deliberately.</p>
+      <a class="btn btn--ghost" href="{{ collection.url }}">{{ 'products.facets.clear' | t }}</a>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.note != blank -%}
+    <p class="collection-note">{{ section.settings.note }}</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Drop 01 · Spring" },
+    { "type": "richtext", "id": "note", "label": "Footer note", "default": "<p>Drop 02 is already on the cutting table.</p>" }
+  ]
+}
+{% endschema %}

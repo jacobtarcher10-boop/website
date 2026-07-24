@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Vesper Dress — Rose Archer</title>
   <meta name="description" content="The Vesper Dress in oxblood satin — cowl neck, bias cut, midi length. Part of the Rose Archer founding drop. UK sizes 6–16.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F2EA'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%235E2129' text-anchor='middle'%3ERA%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4ECDD'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%237C4A24' text-anchor='middle'%3ERA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -186,9 +186,14 @@
     </symbol>
   </svg>
 
-  <a class="visually-hidden" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <p class="announcement">The founding drop — Spring &nbsp;·&nbsp; Free UK shipping over £50</p>
+  <div class="announcement">
+    <p class="visually-hidden">The founding drop — Spring · Free UK shipping over £50</p>
+    <div class="announcement-track" aria-hidden="true">
+      <span class="announcement-set">The founding drop — Spring&ensp;·&ensp;Free UK shipping over £50&ensp;·&ensp;Dressed for the nights that count&ensp;·&ensp;</span><span class="announcement-set">The founding drop — Spring&ensp;·&ensp;Free UK shipping over £50&ensp;·&ensp;Dressed for the nights that count&ensp;·&ensp;</span>
+    </div>
+  </div>
 
   <!-- ====================================================================
        HEADER
@@ -440,7 +445,7 @@
         </div>
         <div class="product-grid product-grid--3" data-related>
 
-          <article class="product-card">
+          <article class="product-card" data-reveal>
             <a class="card-media-link" href="product.html?p=chapel">
               <figure class="product-media media--blush-soft">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Chapel dress — a bias-cut satin column">
@@ -449,13 +454,14 @@
               </figure>
             </a>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">01</span>
               <h3 class="card-name"><a href="product.html?p=chapel">The Chapel Dress</a></h3>
               <p class="card-meta">Bone satin · bias column</p>
               <p class="card-price">£68</p>
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card" data-reveal>
             <a class="card-media-link" href="product.html?p=encore">
               <figure class="product-media media--blush">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Encore top — a velvet halterneck">
@@ -464,13 +470,14 @@
               </figure>
             </a>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">02</span>
               <h3 class="card-name"><a href="product.html?p=encore">The Encore Top</a></h3>
               <p class="card-meta">Espresso velvet · halter</p>
               <p class="card-price">£36</p>
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card" data-reveal>
             <a class="card-media-link" href="product.html?p=aria">
               <figure class="product-media media--blush-soft">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Aria top — a boned satin corset">
@@ -479,6 +486,7 @@
               </figure>
             </a>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">03</span>
               <h3 class="card-name"><a href="product.html?p=aria">The Aria Top</a></h3>
               <p class="card-meta">Blush satin · boned corset</p>
               <p class="card-price">£38</p>

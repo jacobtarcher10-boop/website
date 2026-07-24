@@ -1,0 +1,19 @@
+<section class="signature-strip section" aria-labelledby="signature-title-{{ section.id }}">
+  <div class="container" data-reveal>
+    {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2 id="signature-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+    {%- if section.settings.body != blank -%}<p>{{ section.settings.body }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Signature strip",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The signature" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every drop carries the signature piece." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "One piece in each drop is cut in the signature colour. When it’s gone, it’s gone." }
+  ],
+  "presets": [{ "name": "Signature strip" }]
+}
+{% endschema %}

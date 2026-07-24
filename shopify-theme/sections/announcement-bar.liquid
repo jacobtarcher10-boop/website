@@ -1,0 +1,24 @@
+{%- comment -%}
+  Scrolling marquee announcement bar. Two identical sets loop seamlessly;
+  goes static and centred under prefers-reduced-motion (see theme.css).
+{%- endcomment -%}
+<div class="announcement">
+  <p class="visually-hidden">{{ section.settings.text }}</p>
+  <div class="announcement-track" aria-hidden="true">
+    <span class="announcement-set">{{ section.settings.text }}&ensp;·&ensp;</span><span class="announcement-set">{{ section.settings.text }}&ensp;·&ensp;</span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Message",
+      "default": "The founding drop — Spring · Free UK shipping over £50"
+    }
+  ]
+}
+{% endschema %}

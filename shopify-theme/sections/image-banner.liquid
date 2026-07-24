@@ -1,0 +1,81 @@
+{%- comment -%}
+  Full-width image banner with a heading and buttons over it. Add it from
+  the theme editor via "Add section → Image banner", then pick your image.
+  Overlay + text-colour settings keep the copy readable over any photo.
+{%- endcomment -%}
+<section class="image-banner image-banner--{{ section.settings.height }} text-{{ section.settings.text_color }}"
+  aria-label="{{ section.settings.heading | default: 'Image banner' | strip_html }}">
+
+  <div class="image-banner__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 3000 | image_tag:
+          loading: 'eager', fetchpriority: 'high', sizes: '100vw',
+          widths: '750, 1100, 1500, 2000, 2600, 3000',
+          alt: section.settings.image.alt | default: section.settings.heading | strip_html }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'image-banner__placeholder' }}
+    {%- endif -%}
+    <span class="image-banner__overlay" style="opacity: {{ section.settings.overlay | divided_by: 100.0 }}"></span>
+  </div>
+
+  <div class="container image-banner__content align-{{ section.settings.alignment }}">
+    <div class="image-banner__inner" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="image-banner__heading">{{ section.settings.heading }}{% if section.settings.heading_accent != blank %} <span class="accent-italic">{{ section.settings.heading_accent }}</span>{% endif %}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}<p class="lede">{{ section.settings.subheading }}</p>{%- endif -%}
+      {%- if section.settings.cta1_text != blank or section.settings.cta2_text != blank -%}
+        <div class="hero-ctas">
+          {%- if section.settings.cta1_text != blank -%}<a class="btn btn--primary" href="{{ section.settings.cta1_link | default: '#' }}">{{ section.settings.cta1_text }}</a>{%- endif -%}
+          {%- if section.settings.cta2_text != blank -%}<a class="btn btn--ghost" href="{{ section.settings.cta2_link | default: '#' }}">{{ section.settings.cta2_text }}</a>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    {
+      "type": "range", "id": "overlay", "label": "Image overlay", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 25,
+      "info": "A wash over the image so text stays readable."
+    },
+    {
+      "type": "select", "id": "text_color", "label": "Text colour", "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark (for light images)" },
+        { "value": "light", "label": "Light (for dark images)" }
+      ]
+    },
+    {
+      "type": "select", "id": "height", "label": "Height", "default": "medium",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ]
+    },
+    {
+      "type": "select", "id": "alignment", "label": "Content alignment", "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ]
+    },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Drop 01 · Spring" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Dressed for" },
+    { "type": "text", "id": "heading_accent", "label": "Heading accent (italic)", "default": "the nights that count." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Occasion dresses and going-out tops, in small limited drops." },
+    { "type": "text", "id": "cta1_text", "label": "Button 1 text", "default": "Shop dresses" },
+    { "type": "url", "id": "cta1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "cta2_text", "label": "Button 2 text" },
+    { "type": "url", "id": "cta2_link", "label": "Button 2 link" }
+  ],
+  "presets": [{ "name": "Image banner" }]
+}
+{% endschema %}

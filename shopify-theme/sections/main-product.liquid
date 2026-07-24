@@ -1,0 +1,148 @@
+{%- comment -%}
+  Product detail. Variant selection is progressive: a real <form> posts the
+  selected variant id to /cart/add; assets/global.js enhances the option
+  buttons and (optionally) opens the bag drawer via the Cart AJAX API.
+  Size chart and model note come from product metafields with sensible
+  fallbacks — see the schema notes at the bottom.
+{%- endcomment -%}
+<div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span aria-hidden="true">/</span>
+    {%- if collection -%}
+      <a href="{{ collection.url }}">{{ collection.title }}</a>
+      <span aria-hidden="true">/</span>
+    {%- endif -%}
+    <span aria-current="page">{{ product.title }}</span>
+  </nav>
+
+  <div class="product-layout">
+    {%- comment -%} Gallery {%- endcomment -%}
+    <section class="gallery" aria-label="Product images">
+      <div class="gallery-main" data-gallery-main>
+        <figure class="product-media media--blush">
+          {%- if product.featured_media -%}
+            {{ product.featured_media | image_url: width: 1200 | image_tag: widths: '540, 720, 1080, 1200', sizes: '(min-width: 960px) 55vw, 100vw', alt: product.featured_media.alt | default: product.title }}
+          {%- elsif product.metafields.custom.illustration != blank -%}
+            <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of {{ product.title | escape }}"><use href="#illo-{{ product.metafields.custom.illustration }}"/></svg>
+          {%- endif -%}
+        </figure>
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="gallery-thumbs" data-gallery-thumbs role="group" aria-label="Choose image">
+          {%- for media in product.media -%}
+            <button class="gallery-thumb" type="button" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" data-media-id="{{ media.id }}" aria-label="View image {{ forloop.index }} of {{ product.media.size }}">
+              <figure class="product-media media--blush">
+                {{ media | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}
+              </figure>
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </section>
+
+    {%- comment -%} Purchase column {%- endcomment -%}
+    <section class="product-info" aria-label="Product details">
+      {%- if product.metafields.custom.subtitle != blank -%}<span class="eyebrow">{{ product.metafields.custom.subtitle }}</span>{%- endif -%}
+      <h1 class="product-title">{{ product.title }}</h1>
+      <p class="product-price" data-price>{{ product.selected_or_first_available_variant.price | money }}</p>
+
+      {%- form 'product', product, id: 'product-form', novalidate: 'novalidate' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-input>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            {%- assign is_colour = false -%}
+            {%- assign dn = option.name | downcase -%}
+            {%- if dn contains 'colour' or dn contains 'color' -%}{%- assign is_colour = true -%}{%- endif -%}
+            <div class="option-group" data-option-group data-option-position="{{ option.position }}">
+              <p class="option-label" id="option-label-{{ option.position }}">
+                {{ option.name }}
+                {%- if is_colour -%}<span class="option-value" data-option-value>{{ option.selected_value }}</span>
+                {%- else -%}<a class="size-guide-link" href="#size-fit">{{ 'products.product.size_guide' | t }}</a>{%- endif -%}
+              </p>
+              <div class="{% if is_colour %}swatch-list{% else %}size-list{% endif %}" role="group" aria-labelledby="option-label-{{ option.position }}">
+                {%- for value in option.values -%}
+                  {%- assign checked = false -%}
+                  {%- if option.selected_value == value -%}{%- assign checked = true -%}{%- endif -%}
+                  {%- if is_colour -%}
+                    <button class="swatch" type="button" data-option-button data-value="{{ value | escape }}"
+                      aria-label="{{ option.name }}: {{ value }}" aria-pressed="{{ checked }}"
+                      {% if value.swatch.color %}style="background-color: {{ value.swatch.color }}"{% endif %}></button>
+                  {%- else -%}
+                    <button class="size-option" type="button" data-option-button data-value="{{ value | escape }}" aria-pressed="{{ checked }}">{{ value }}</button>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <p class="size-hint" data-size-hint hidden role="status">{{ 'products.product.select_size' | t }}</p>
+
+        <button class="btn btn--primary btn--full add-to-bag" type="submit" name="add" data-add-to-bag {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}{{ 'products.product.add_to_bag' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+        </button>
+        <p class="add-confirm" data-add-confirm hidden role="status"></p>
+      {%- endform -%}
+
+      <ul class="trust-line" role="list">
+        <li>Free UK shipping over {{ settings.free_shipping_threshold | default: 50 | times: 100 | money_without_trailing_zeros }}</li>
+        <li>Ships next working day from the UK</li>
+        <li>14-day returns, no interrogation</li>
+      </ul>
+
+      {%- comment -%} Accordions {%- endcomment -%}
+      <div class="accordions">
+        <div class="accordion">
+          <h2><button class="accordion-trigger" type="button" aria-expanded="true" aria-controls="panel-description-{{ section.id }}" id="trigger-description-{{ section.id }}">Description <span class="accordion-icon" aria-hidden="true"></span></button></h2>
+          <div class="accordion-panel" id="panel-description-{{ section.id }}" role="region" aria-labelledby="trigger-description-{{ section.id }}">
+            <div class="accordion-body">{{ product.description }}</div>
+          </div>
+        </div>
+
+        <div class="accordion" id="size-fit">
+          <h2><button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-fit-{{ section.id }}" id="trigger-fit-{{ section.id }}">Size &amp; fit <span class="accordion-icon" aria-hidden="true"></span></button></h2>
+          <div class="accordion-panel" id="panel-fit-{{ section.id }}" role="region" aria-labelledby="trigger-fit-{{ section.id }}">
+            <div class="accordion-body">
+              {%- if product.metafields.custom.fit_intro != blank -%}<p>{{ product.metafields.custom.fit_intro }}</p>{%- endif -%}
+              {%- if product.metafields.custom.size_chart != blank -%}
+                {{ product.metafields.custom.size_chart }}
+              {%- else -%}
+                <p>Add a <code>custom.size_chart</code> metafield (rich text table) to show full garment measurements per size.</p>
+              {%- endif -%}
+              {%- if product.metafields.custom.model_note != blank -%}<p class="fit-note">{{ product.metafields.custom.model_note }}</p>{%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <h2><button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-fabric-{{ section.id }}" id="trigger-fabric-{{ section.id }}">Fabric &amp; care <span class="accordion-icon" aria-hidden="true"></span></button></h2>
+          <div class="accordion-panel" id="panel-fabric-{{ section.id }}" role="region" aria-labelledby="trigger-fabric-{{ section.id }}">
+            <div class="accordion-body">
+              {%- if product.metafields.custom.fabric_care != blank -%}{{ product.metafields.custom.fabric_care }}{%- else -%}<p>Add a <code>custom.fabric_care</code> metafield to describe fabric and care.</p>{%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion" id="delivery">
+          <h2><button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-delivery-{{ section.id }}" id="trigger-delivery-{{ section.id }}">Delivery &amp; returns <span class="accordion-icon" aria-hidden="true"></span></button></h2>
+          <div class="accordion-panel" id="panel-delivery-{{ section.id }}" role="region" aria-labelledby="trigger-delivery-{{ section.id }}">
+            <div class="accordion-body">{{ section.settings.delivery_text }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "richtext", "id": "delivery_text", "label": "Delivery & returns copy", "default": "<p>Orders placed before 2pm ship the next working day from our UK studio.</p><ul><li>UK standard (2–3 working days) — £3.95, free over £50</li><li>UK next day (order by 2pm) — £6.95</li><li>International — calculated at checkout</li></ul><p>Returns accepted within 14 days of delivery, unworn with tags attached.</p>" }
+  ]
+}
+{% endschema %}

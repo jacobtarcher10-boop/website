@@ -1,0 +1,47 @@
+<div class="container cart-page section">
+  <header class="collection-head" style="padding-top:0">
+    <h1>{{ 'sections.cart.title' | t }}</h1>
+  </header>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form">
+      <ul class="cart-lines" role="list">
+        {%- for item in cart.items -%}
+          <li class="bag-item" data-line-key="{{ item.key }}">
+            <div class="bag-item-media">
+              {%- if item.image -%}{{ item.image | image_url: width: 220 | image_tag: loading: 'lazy', alt: item.product.title }}{%- endif -%}
+            </div>
+            <div>
+              <p class="bag-item-name"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+              <p class="bag-item-meta">{{ item.variant.title }}</p>
+              <div class="bag-qty">
+                <a class="qty-step" href="{{ item.url_to_remove }}" aria-label="Remove one {{ item.product.title | escape }}">&minus;</a>
+                <span>{{ item.quantity }}</span>
+                <a class="qty-step" href="{{ item.url_to_add }}" aria-label="Add one {{ item.product.title | escape }}">+</a>
+              </div>
+            </div>
+            <div>
+              <p class="bag-item-price">{{ item.final_line_price | money }}</p>
+              <a class="bag-item-remove" href="{{ item.url_to_remove }}">{{ 'sections.cart.remove' | t }}</a>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="cart-foot">
+        <p class="bag-subtotal"><span>{{ 'sections.cart.subtotal' | t }}</span> <span>{{ cart.total_price | money }}</span></p>
+        <p class="bag-note">{{ 'sections.cart.shipping_note' | t }}</p>
+        <button class="btn btn--primary btn--full" type="submit" name="checkout">{{ 'sections.cart.checkout' | t }}</button>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="bag-empty">
+      <p>{{ 'sections.cart.empty' | t }}</p>
+      <a class="btn btn--ghost" href="{{ routes.all_products_collection_url }}">{{ 'sections.cart.continue' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}
