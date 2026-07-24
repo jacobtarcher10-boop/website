@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Vesper Dress — Rose Archer</title>
+  <meta name="description" content="The Vesper Dress in oxblood satin — cowl neck, bias cut, midi length. Part of the Rose Archer founding drop. UK sizes 6–16.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F2EA'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%235E2129' text-anchor='middle'%3ERA%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       SVG SPRITE — placeholder garment illustrations (see README.md for the
+       photography swap). This page is a template: js/main.js reads ?p=vesper
+       |chapel|encore|aria and fills in the product. The static markup below
+       is the Vesper, as a no-JS fallback.
+       ====================================================================== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="illo-vesper" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M140 58 L128 122"/>
+        <path d="M220 58 L232 122"/>
+        <path d="M128 122 C152 154 208 154 232 122"/>
+        <path d="M138 126 C158 148 202 148 222 126"/>
+        <path d="M149 129 C165 143 195 143 211 129"/>
+        <path d="M128 122 C119 186 117 212 122 252 C127 304 117 382 123 442"/>
+        <path d="M232 122 C241 186 243 212 238 252 C233 304 243 382 237 442"/>
+        <path d="M123 442 C160 453 200 453 237 442"/>
+        <path d="M141 240 C165 247 195 247 219 240"/>
+        <path d="M158 262 C155 322 160 384 156 436"/>
+        <path d="M202 268 C205 326 200 386 204 438"/>
+        <path d="M180 258 C179 300 181 342 180 372"/>
+      </g>
+    </symbol>
+    <symbol id="illo-vesper-back" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M138 58 L128 178"/>
+        <path d="M222 58 L232 178"/>
+        <path d="M128 178 C155 214 205 214 232 178"/>
+        <path d="M140 184 C162 210 198 210 220 184"/>
+        <path d="M128 178 C121 224 118 236 122 268 C127 316 118 388 123 442"/>
+        <path d="M232 178 C239 224 242 236 238 268 C233 316 242 388 237 442"/>
+        <path d="M123 442 C160 453 200 453 237 442"/>
+        <path d="M160 290 C157 340 161 396 157 438"/>
+        <path d="M200 294 C203 344 199 398 203 438"/>
+      </g>
+    </symbol>
+    <symbol id="illo-vesper-detail" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M70 92 L40 210"/>
+        <path d="M290 92 L320 210"/>
+        <path d="M40 210 C110 290 250 290 320 210"/>
+        <path d="M62 222 C120 282 240 282 298 222"/>
+        <path d="M86 232 C132 272 228 272 274 232"/>
+        <path d="M112 240 C146 268 214 268 248 240"/>
+        <path d="M40 210 C34 292 30 348 34 420"/>
+        <path d="M320 210 C326 292 330 348 326 420"/>
+        <path d="M120 306 C118 348 121 392 118 418"/>
+        <path d="M240 310 C242 352 239 394 242 420"/>
+      </g>
+    </symbol>
+    <symbol id="illo-chapel" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M144 54 L136 116"/>
+        <path d="M216 54 L224 116"/>
+        <path d="M136 116 C160 122 200 122 224 116"/>
+        <path d="M136 116 C130 190 128 260 131 330 C133 374 130 414 132 448"/>
+        <path d="M224 116 C230 190 232 260 229 330 C227 374 230 414 228 448"/>
+        <path d="M132 448 C164 456 196 456 228 448"/>
+        <path d="M138 160 C170 176 196 172 222 158"/>
+        <path d="M134 226 C168 242 198 238 226 224"/>
+        <path d="M132 296 C168 312 200 308 228 294"/>
+        <path d="M228 360 L219 448"/>
+      </g>
+    </symbol>
+    <symbol id="illo-chapel-back" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M142 54 L136 196"/>
+        <path d="M218 54 L224 196"/>
+        <path d="M136 196 C160 230 200 230 224 196"/>
+        <path d="M136 196 C130 262 128 300 131 348 C133 388 130 420 132 448"/>
+        <path d="M224 196 C230 262 232 300 229 348 C227 388 230 420 228 448"/>
+        <path d="M132 448 C164 456 196 456 228 448"/>
+        <path d="M138 260 C170 274 198 270 222 258"/>
+        <path d="M134 330 C168 344 200 340 226 328"/>
+      </g>
+    </symbol>
+    <symbol id="illo-chapel-detail" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 60 C58 190 56 320 60 430"/>
+        <path d="M300 60 C302 190 304 320 300 430"/>
+        <path d="M60 430 C140 446 220 446 300 430"/>
+        <path d="M60 110 C150 150 230 140 300 100"/>
+        <path d="M58 210 C150 250 234 240 302 200"/>
+        <path d="M58 310 C152 350 236 340 302 300"/>
+        <path d="M300 340 L282 430"/>
+      </g>
+    </symbol>
+    <symbol id="illo-encore" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M180 66 C172 60 166 64 168 72 C170 79 178 80 182 74 C186 68 192 66 194 72"/>
+        <path d="M172 74 C158 106 148 128 140 150"/>
+        <path d="M188 74 C202 106 212 128 220 150"/>
+        <path d="M140 150 C132 196 128 244 132 296"/>
+        <path d="M220 150 C228 196 232 244 228 296"/>
+        <path d="M132 296 C164 306 196 306 228 296"/>
+        <path d="M140 150 C166 164 194 164 220 150"/>
+        <path d="M156 180 C154 220 152 258 154 292"/>
+        <path d="M204 184 C206 222 208 260 206 294"/>
+        <path d="M180 168 C179 210 181 254 180 298"/>
+      </g>
+    </symbol>
+    <symbol id="illo-encore-back" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M162 70 C170 62 190 62 198 70"/>
+        <path d="M168 70 C158 92 152 112 150 130"/>
+        <path d="M192 70 C202 92 208 112 210 130"/>
+        <path d="M150 130 C168 122 192 122 210 130"/>
+        <path d="M176 130 C170 168 166 210 164 262"/>
+        <path d="M184 130 C190 168 194 210 196 262"/>
+        <path d="M132 268 C164 258 196 258 228 268"/>
+        <path d="M132 268 C130 280 130 286 132 296"/>
+        <path d="M228 268 C230 280 230 286 228 296"/>
+        <path d="M132 296 C164 288 196 288 228 296"/>
+      </g>
+    </symbol>
+    <symbol id="illo-encore-detail" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M180 200 C160 188 140 196 144 214 C148 232 172 232 180 216 C188 232 212 232 216 214 C220 196 200 188 180 200"/>
+        <path d="M168 226 C150 268 138 310 132 356"/>
+        <path d="M192 226 C210 268 222 310 228 356"/>
+        <path d="M160 250 C148 288 140 324 136 358"/>
+        <path d="M200 250 C212 288 220 324 224 358"/>
+      </g>
+    </symbol>
+    <symbol id="illo-aria" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M134 132 C150 148 168 150 180 140 C192 150 210 148 226 132"/>
+        <path d="M134 132 C126 176 124 216 130 252 C134 274 132 288 130 300"/>
+        <path d="M226 132 C234 176 236 216 230 252 C226 274 228 288 230 300"/>
+        <path d="M130 300 C146 312 168 318 180 306 C192 318 214 312 230 300"/>
+        <path d="M155 143 C151 196 150 250 153 305"/>
+        <path d="M180 140 C180 196 180 250 180 306"/>
+        <path d="M205 143 C209 196 210 250 207 305"/>
+        <path d="M141 96 L136 132"/>
+        <path d="M219 96 L224 132"/>
+      </g>
+    </symbol>
+    <symbol id="illo-aria-back" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M134 132 C158 140 168 140 168 134"/>
+        <path d="M226 132 C202 140 192 140 192 134"/>
+        <path d="M134 132 C126 176 124 216 130 252 C134 274 132 288 130 300"/>
+        <path d="M226 132 C234 176 236 216 230 252 C226 274 228 288 230 300"/>
+        <path d="M130 300 C148 308 162 310 168 306"/>
+        <path d="M230 300 C212 308 198 310 192 306"/>
+        <path d="M168 134 C166 192 166 250 168 306"/>
+        <path d="M192 134 C194 192 194 250 192 306"/>
+        <path d="M168 150 L192 172"/>
+        <path d="M192 150 L168 172"/>
+        <path d="M168 194 L192 216"/>
+        <path d="M192 194 L168 216"/>
+        <path d="M168 238 L192 260"/>
+        <path d="M192 238 L168 260"/>
+        <path d="M168 282 L192 300"/>
+        <path d="M192 282 L168 300"/>
+        <path d="M141 96 L136 132"/>
+        <path d="M219 96 L224 132"/>
+      </g>
+    </symbol>
+    <symbol id="illo-aria-detail" viewBox="0 0 360 480">
+      <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M70 120 C110 152 250 152 290 120"/>
+        <path d="M64 400 C120 372 240 372 296 400"/>
+        <path d="M110 140 C104 226 104 300 110 384"/>
+        <path d="M122 142 C116 226 116 300 122 382"/>
+        <path d="M174 148 C172 232 172 300 174 378"/>
+        <path d="M186 148 C188 232 188 300 186 378"/>
+        <path d="M238 142 C244 226 244 300 238 382"/>
+        <path d="M250 140 C256 226 256 300 250 384"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <a class="visually-hidden" href="#main">Skip to content</a>
+
+  <p class="announcement">The founding drop — Spring &nbsp;·&nbsp; Free UK shipping over £50</p>
+
+  <!-- ====================================================================
+       HEADER
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="icon-btn menu-btn" type="button" data-menu-open aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M3 7h18M3 12h18M3 17h18"/>
+        </svg>
+      </button>
+
+      <a class="logo" href="index.html">Rose&nbsp;Archer</a>
+
+      <nav class="primary-nav" aria-label="Main">
+        <ul role="list">
+          <li><a href="collection.html?cat=dresses">Dresses</a></li>
+          <li><a href="collection.html?cat=tops">Going-Out Tops</a></li>
+          <li><a href="collection.html">New In</a></li>
+          <li><a href="index.html#story">Our Story</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" type="button" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5"/>
+            <path d="M15.5 15.5 L21 21"/>
+          </svg>
+        </button>
+        <button class="icon-btn" type="button" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4.5 20.5 C6 15.8 9 14.5 12 14.5 C15 14.5 18 15.8 19.5 20.5"/>
+          </svg>
+        </button>
+        <button class="icon-btn" type="button" data-bag-open aria-label="Open bag" aria-controls="bag-drawer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M5 8 H19 L18 21 H6 Z"/>
+            <path d="M9 10 V6 a3 3 0 0 1 6 0 v4"/>
+          </svg>
+          <span class="bag-count" data-bag-count hidden>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile slide-out menu -->
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" aria-hidden="true">
+    <div class="mobile-menu-head">
+      <span class="logo" aria-hidden="true">Rose&nbsp;Archer</span>
+      <button class="icon-btn" type="button" data-menu-close aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M5 5 L19 19 M19 5 L5 19"/>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile main">
+      <a href="collection.html?cat=dresses">Dresses</a>
+      <a href="collection.html?cat=tops">Going-Out Tops</a>
+      <a href="collection.html">New In</a>
+      <a href="index.html#story">Our Story</a>
+    </nav>
+    <p class="mobile-menu-foot">Free UK shipping over £50 &nbsp;·&nbsp; <a href="index.html#newsletter">Join the list</a></p>
+  </nav>
+
+  <main id="main" data-product-page>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="collection.html">The Founding Drop</a>
+        <span aria-hidden="true">/</span>
+        <span data-product-crumb aria-current="page">The Vesper Dress</span>
+      </nav>
+
+      <div class="product-layout">
+
+        <!-- ==============================================================
+             GALLERY
+             Placeholder illustrations today; swap each inner <svg> for an
+             <img> when photography exists (see README.md).
+             ============================================================== -->
+        <section class="gallery" aria-label="Product images">
+          <div class="gallery-main" data-gallery-main>
+            <figure class="product-media media--blush">
+              <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Vesper dress — a cowl-neck satin slip midi with thin straps, front view">
+                <use href="#illo-vesper"/>
+              </svg>
+            </figure>
+          </div>
+          <div class="gallery-thumbs" data-gallery-thumbs role="group" aria-label="Choose image">
+            <button class="gallery-thumb" type="button" aria-current="true" aria-label="View image 1 of 3">
+              <figure class="product-media media--blush">
+                <svg viewBox="0 0 360 480" aria-hidden="true"><use href="#illo-vesper"/></svg>
+              </figure>
+            </button>
+            <button class="gallery-thumb" type="button" aria-current="false" aria-label="View image 2 of 3">
+              <figure class="product-media media--blush">
+                <svg viewBox="0 0 360 480" aria-hidden="true"><use href="#illo-vesper-back"/></svg>
+              </figure>
+            </button>
+            <button class="gallery-thumb" type="button" aria-current="false" aria-label="View image 3 of 3">
+              <figure class="product-media media--blush">
+                <svg viewBox="0 0 360 480" aria-hidden="true"><use href="#illo-vesper-detail"/></svg>
+              </figure>
+            </button>
+          </div>
+        </section>
+
+        <!-- ==============================================================
+             PURCHASE COLUMN
+             ============================================================== -->
+        <section class="product-info" aria-label="Product details">
+          <span class="eyebrow" data-product-meta>Oxblood satin · cowl neck · midi</span>
+          <h1 class="product-title" data-product-name>The Vesper Dress</h1>
+          <p class="product-price" data-product-price>£64</p>
+
+          <!-- Colour -->
+          <div class="option-group">
+            <p class="option-label" id="colour-label">Colour <span class="option-value" data-colour-value>Oxblood</span></p>
+            <div class="swatch-list" data-swatches role="group" aria-labelledby="colour-label">
+              <button class="swatch" type="button" style="background-color:#5E2129" aria-label="Colour: Oxblood" aria-pressed="true"></button>
+            </div>
+          </div>
+
+          <!-- Size -->
+          <div class="option-group">
+            <p class="option-label" id="size-label">Size <a class="size-guide-link" href="#size-fit">Size guide</a></p>
+            <div class="size-list" data-sizes role="group" aria-labelledby="size-label">
+              <button class="size-option" type="button" aria-pressed="false">UK 6</button>
+              <button class="size-option" type="button" aria-pressed="false">UK 8</button>
+              <button class="size-option" type="button" aria-pressed="false">UK 10</button>
+              <button class="size-option" type="button" aria-pressed="false">UK 12</button>
+              <button class="size-option" type="button" aria-pressed="false">UK 14</button>
+              <button class="size-option" type="button" aria-pressed="false">UK 16</button>
+            </div>
+            <p class="size-hint" data-size-hint hidden role="status">Select a size first.</p>
+          </div>
+
+          <button class="btn btn--primary btn--full add-to-bag" type="button" data-add-to-bag>Add to bag</button>
+          <p class="add-confirm" data-add-confirm hidden role="status"></p>
+
+          <!-- Trust line -->
+          <ul class="trust-line" role="list">
+            <li>Free UK shipping over £50</li>
+            <li>Ships next working day from the UK</li>
+            <li>14-day returns, no interrogation</li>
+          </ul>
+
+          <!-- ============================================================
+               ACCORDIONS
+               ============================================================ -->
+          <div class="accordions">
+
+            <div class="accordion">
+              <h2>
+                <button class="accordion-trigger" type="button" aria-expanded="true" aria-controls="panel-description" id="trigger-description">
+                  Description
+                  <span class="accordion-icon" aria-hidden="true"></span>
+                </button>
+              </h2>
+              <div class="accordion-panel" id="panel-description" role="region" aria-labelledby="trigger-description">
+                <div class="accordion-body" data-product-description>
+                  <p>The dress the first drop was built around. Cut in a heavyweight satin with a soft, liquid fall, the Vesper drapes into a cowl at the neckline and skims — never clings — to a midi hem.</p>
+                  <p>Bias construction means it moves with you from dinner to the dance floor, and the double-lined bodice keeps everything exactly where you left it.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion" id="size-fit">
+              <h2>
+                <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-fit" id="trigger-fit">
+                  Size &amp; fit
+                  <span class="accordion-icon" aria-hidden="true"></span>
+                </button>
+              </h2>
+              <div class="accordion-panel" id="panel-fit" role="region" aria-labelledby="trigger-fit">
+                <div class="accordion-body">
+                  <p data-fit-intro>True to size with a bias-cut skim. Between sizes, take the smaller for a closer fit through the hip.</p>
+                  <table class="fit-table" data-fit-table>
+                    <caption>Garment measurements, cm</caption>
+                    <thead>
+                      <tr><th scope="col">UK size</th><th scope="col">Bust</th><th scope="col">Waist</th><th scope="col">Hip</th><th scope="col">Length</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><th scope="row">6</th><td>82</td><td>64</td><td>90</td><td>118</td></tr>
+                      <tr><th scope="row">8</th><td>87</td><td>69</td><td>95</td><td>119</td></tr>
+                      <tr><th scope="row">10</th><td>92</td><td>74</td><td>100</td><td>120</td></tr>
+                      <tr><th scope="row">12</th><td>97</td><td>79</td><td>105</td><td>121</td></tr>
+                      <tr><th scope="row">14</th><td>103</td><td>85</td><td>111</td><td>122</td></tr>
+                      <tr><th scope="row">16</th><td>109</td><td>91</td><td>117</td><td>123</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="fit-note" data-fit-model>Olivia is 5′7″ (170 cm) and wears a UK 8.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion">
+              <h2>
+                <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-fabric" id="trigger-fabric">
+                  Fabric &amp; care
+                  <span class="accordion-icon" aria-hidden="true"></span>
+                </button>
+              </h2>
+              <div class="accordion-panel" id="panel-fabric" role="region" aria-labelledby="trigger-fabric">
+                <div class="accordion-body" data-product-fabric>
+                  <p>96% polyester satin, 4% elastane. Fully lined bodice.</p>
+                  <p>A dense, matte-backed satin chosen for weight — it hangs, it doesn’t flutter. Cool hand wash or gentle machine cycle at 30°, inside out in a wash bag. Cool iron on reverse. Do not tumble dry.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion" id="delivery">
+              <h2>
+                <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="panel-delivery" id="trigger-delivery">
+                  Delivery &amp; returns
+                  <span class="accordion-icon" aria-hidden="true"></span>
+                </button>
+              </h2>
+              <div class="accordion-panel" id="panel-delivery" role="region" aria-labelledby="trigger-delivery">
+                <div class="accordion-body">
+                  <p>Orders placed before 2pm ship the next working day from our UK studio.</p>
+                  <ul>
+                    <li>UK standard (2–3 working days) — £3.95, free over £50</li>
+                    <li>UK next day (order by 2pm) — £6.95</li>
+                    <li>International — calculated at checkout</li>
+                  </ul>
+                  <p>Returns are accepted within 14 days of delivery, unworn with tags attached. Refunds land within 5 working days of the piece reaching us.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         COMPLETE THE LOOK
+         ================================================================ -->
+    <section class="related section" aria-labelledby="related-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Styled together</span>
+          <h2 id="related-title">Complete the look</h2>
+        </div>
+        <div class="product-grid product-grid--3" data-related>
+
+          <article class="product-card">
+            <a class="card-media-link" href="product.html?p=chapel">
+              <figure class="product-media media--blush-soft">
+                <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Chapel dress — a bias-cut satin column">
+                  <use href="#illo-chapel"/>
+                </svg>
+              </figure>
+            </a>
+            <div class="card-info">
+              <h3 class="card-name"><a href="product.html?p=chapel">The Chapel Dress</a></h3>
+              <p class="card-meta">Bone satin · bias column</p>
+              <p class="card-price">£68</p>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <a class="card-media-link" href="product.html?p=encore">
+              <figure class="product-media media--blush">
+                <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Encore top — a velvet halterneck">
+                  <use href="#illo-encore"/>
+                </svg>
+              </figure>
+            </a>
+            <div class="card-info">
+              <h3 class="card-name"><a href="product.html?p=encore">The Encore Top</a></h3>
+              <p class="card-meta">Espresso velvet · halter</p>
+              <p class="card-price">£36</p>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <a class="card-media-link" href="product.html?p=aria">
+              <figure class="product-media media--blush-soft">
+                <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Aria top — a boned satin corset">
+                  <use href="#illo-aria"/>
+                </svg>
+              </figure>
+            </a>
+            <div class="card-info">
+              <h3 class="card-name"><a href="product.html?p=aria">The Aria Top</a></h3>
+              <p class="card-meta">Blush satin · boned corset</p>
+              <p class="card-price">£38</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       FOOTER
+       ==================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="index.html">Rose&nbsp;Archer</a>
+          <p>Occasion wear in small limited drops. Designed in the UK by Olivia, kept on the rails by Jacob.</p>
+        </div>
+
+        <nav class="footer-col" aria-label="Shop">
+          <h3>Shop</h3>
+          <ul role="list">
+            <li><a href="collection.html?cat=dresses">Dresses</a></li>
+            <li><a href="collection.html?cat=tops">Going-Out Tops</a></li>
+            <li><a href="collection.html">New In</a></li>
+            <li><a href="collection.html">The Founding Drop</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="Help">
+          <h3>Help</h3>
+          <ul role="list">
+            <li><a href="#delivery">Delivery</a></li>
+            <li><a href="#delivery">Returns</a></li>
+            <li><a href="#size-fit">Size guide</a></li>
+            <li><a href="mailto:hello@rosearcher.co.uk">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="World">
+          <h3>World</h3>
+          <ul role="list">
+            <li><a href="index.html#story">Our story</a></li>
+            <li><a href="index.html#newsletter">The list</a></li>
+            <li><a href="https://instagram.com" rel="noopener">Instagram</a></li>
+            <li><a href="https://tiktok.com" rel="noopener">TikTok</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-base">
+        <p>© <span data-year>2026</span> Rose Archer · Dressed for the nights that count.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" rel="noopener">Instagram</a>
+          <a href="https://tiktok.com" rel="noopener">TikTok</a>
+          <a href="https://pinterest.com" rel="noopener">Pinterest</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       BAG DRAWER (shared across pages)
+       ==================================================================== -->
+  <div class="scrim" data-scrim></div>
+
+  <aside class="bag-drawer" id="bag-drawer" aria-label="Shopping bag" aria-hidden="true">
+    <div class="bag-head">
+      <h2>Your bag <span class="visually-hidden">contains </span>(<span data-bag-count>0</span>)</h2>
+      <button class="icon-btn" type="button" data-bag-close aria-label="Close bag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M5 5 L19 19 M19 5 L5 19"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="bag-shipping" data-bag-shipping hidden aria-live="polite"></p>
+
+    <ul class="bag-items" role="list" data-bag-items></ul>
+
+    <div class="bag-empty" data-bag-empty>
+      <p>Your bag is empty — for now.</p>
+      <a class="btn btn--ghost" href="collection.html" data-bag-close>Shop the drop</a>
+    </div>
+
+    <div class="bag-foot" data-bag-foot hidden>
+      <p class="bag-subtotal"><span>Subtotal</span> <span data-bag-subtotal>£0</span></p>
+      <p class="bag-note">Shipping calculated at checkout · 14-day returns</p>
+      <button class="btn btn--primary btn--full" type="button">Checkout</button>
+    </div>
+  </aside>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

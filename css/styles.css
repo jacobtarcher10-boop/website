@@ -1,0 +1,1865 @@
+/* ==========================================================================
+   ROSE ARCHER — styles.css
+   --------------------------------------------------------------------------
+   Single stylesheet for the Rose Archer storefront.
+
+   Contents
+   01. Custom properties (palette, type, spacing)
+   02. Reset & base
+   03. Typography
+   04. Buttons & inline links
+   05. Forms
+   06. Layout helpers
+   07. Announcement bar
+   08. Header & navigation
+   09. Mobile menu
+   10. Hero
+   11. Section heads
+   12. Product cards & media
+   13. Category panels
+   14. Signature strip
+   15. Reviews
+   16. Brand story
+   17. Newsletter
+   18. Footer
+   19. Scrim & bag drawer
+   20. Product detail page
+   21. Collection page
+   22. Focus states, motion & accessibility
+
+   Breakpoints: 520px · 760px · 960px (mobile-first, min-width queries)
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. CUSTOM PROPERTIES
+   Change the brand in one place. Every colour in the site refers back here.
+   ========================================================================== */
+
+:root {
+  /* Palette */
+  --bone:            #F6F2EA;  /* main background */
+  --bone-light:      #FBF8F2;  /* cards & panels */
+  --espresso:        #2B211B;  /* text & logo */
+  --oxblood:         #5E2129;  /* signature accent: buttons, links, bar */
+  --oxblood-pressed: #471820;  /* hover / pressed states */
+  --rose:            #C9909A;  /* secondary accent, eyebrow text.
+                                  NOTE: fails WCAG AA on bone at body sizes —
+                                  use only for large or decorative text. */
+  --blush:           #EBD8D4;  /* soft gradient panels */
+  --blush-soft:      #F2E6E2;  /* softer gradient stop */
+  --smoke:           #8D8680;  /* dividers & LARGE secondary text only.
+                                  3.2:1 on bone — passes AA for large text,
+                                  fails for body copy. */
+
+  /* Derived tints (palette colours at low alpha — hairlines & washes) */
+  --hairline:        rgba(43, 33, 27, 0.14);
+  --hairline-strong: rgba(43, 33, 27, 0.32);
+  --hairline-bone:   rgba(246, 242, 234, 0.28);
+  --scrim:           rgba(43, 33, 27, 0.42);
+  --shadow-soft:     0 24px 60px -30px rgba(43, 33, 27, 0.35);
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body:    "Jost", "Century Gothic", sans-serif;
+
+  --track-logo: 0.22em;  /* brand name letterspacing */
+  --track-ui:   0.24em;  /* nav, buttons, eyebrows */
+
+  /* Rhythm */
+  --space-section: clamp(4rem, 9vw, 7rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --container: 76rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur: 0.35s;
+}
+
+
+/* ==========================================================================
+   02. RESET & BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--espresso);
+  background-color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lock scrolling while a drawer or menu is open (set by JS) */
+body.is-locked {
+  overflow: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* ==========================================================================
+   03. TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3,
+.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: clamp(2.6rem, 6.5vw, 4.4rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 2.75rem); }
+h3 { font-size: clamp(1.35rem, 2.5vw, 1.6rem); font-weight: 400; }
+
+/* Small uppercase label above headings */
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  color: var(--rose); /* decorative — headline beneath carries the meaning */
+  margin-bottom: 1rem;
+}
+
+.lede {
+  font-size: 1.05rem;
+  max-width: 34em;
+}
+
+/* Italic accent inside serif headings */
+.accent-italic {
+  font-style: italic;
+  color: var(--oxblood);
+}
+
+::selection {
+  background: var(--blush);
+  color: var(--espresso);
+}
+
+
+/* ==========================================================================
+   04. BUTTONS & INLINE LINKS
+   ========================================================================== */
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+.btn--primary {
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+}
+
+.btn--primary:hover {
+  background-color: var(--oxblood-pressed);
+}
+
+.btn--ghost {
+  border-color: var(--hairline-strong);
+  color: var(--espresso);
+}
+
+.btn--ghost:hover {
+  border-color: var(--oxblood);
+  color: var(--oxblood);
+}
+
+/* Ghost button for use on the dark oxblood strip */
+.btn--ghost-light {
+  border-color: var(--hairline-bone);
+  color: var(--bone-light);
+}
+
+.btn--ghost-light:hover {
+  border-color: var(--bone-light);
+}
+
+.btn--full {
+  display: block;
+  width: 100%;
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Understated text link with a hairline underline */
+.text-link {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--oxblood);
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid currentColor;
+  transition: color var(--dur) var(--ease);
+}
+
+.text-link:hover {
+  color: var(--oxblood-pressed);
+}
+
+/* Prose links */
+p a,
+li a {
+  color: var(--oxblood);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+p a:hover,
+li a:hover {
+  color: var(--oxblood-pressed);
+}
+
+
+/* ==========================================================================
+   05. FORMS
+   ========================================================================== */
+
+input,
+select {
+  font: inherit;
+  color: var(--espresso);
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+input::placeholder {
+  color: var(--espresso);
+  opacity: 0.55;
+}
+
+/* Minimal select, used in filters and sorting */
+.select {
+  position: relative;
+  display: inline-block;
+}
+
+.select select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.7rem 2.1rem 0.7rem 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--hairline);
+  background-color: var(--bone-light);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.select select:hover {
+  border-color: var(--hairline-strong);
+}
+
+/* Drawn chevron for selects */
+.select::after {
+  content: "";
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1px solid var(--espresso);
+  border-bottom: 1px solid var(--espresso);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   06. LAYOUT HELPERS
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+
+/* ==========================================================================
+   07. ANNOUNCEMENT BAR
+   ========================================================================== */
+
+.announcement {
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+  text-align: center;
+  padding: 0.6rem var(--gutter);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   08. HEADER & NAVIGATION
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: var(--bone);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4.25rem;
+}
+
+/* Brand wordmark — Cormorant Light, uppercase, wide tracking */
+.logo {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.35rem;
+  letter-spacing: var(--track-logo);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--espresso);
+  white-space: nowrap;
+  /* optical correction for the trailing letterspace */
+  margin-right: calc(var(--track-logo) * -1);
+}
+
+.primary-nav {
+  display: none;
+  justify-self: center;
+}
+
+.primary-nav ul {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.primary-nav a {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--espresso);
+  padding-block: 0.5rem;
+  border-bottom: 1px solid transparent;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.primary-nav a:hover,
+.primary-nav a[aria-current="page"] {
+  color: var(--oxblood);
+  border-bottom-color: var(--oxblood);
+}
+
+/* Utility icons: search, account, bag, menu */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  justify-self: end;
+}
+
+.icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  color: var(--espresso);
+  transition: color var(--dur) var(--ease);
+}
+
+.icon-btn:hover {
+  color: var(--oxblood);
+}
+
+.icon-btn svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+/* Item count on the bag icon */
+.bag-count {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.1rem;
+  min-width: 1rem;
+  height: 1rem;
+  padding-inline: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+  border-radius: 50%;
+}
+
+.menu-btn {
+  display: inline-flex;
+}
+
+@media (min-width: 760px) {
+  .primary-nav { display: block; }
+  .menu-btn { display: none; }
+}
+
+
+/* ==========================================================================
+   09. MOBILE MENU
+   ========================================================================== */
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 60;
+  width: min(21rem, 88vw);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bone-light);
+  padding: 1.5rem var(--gutter) 2.5rem;
+  transform: translateX(-102%);
+  visibility: hidden;
+  transition: transform var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+
+.mobile-menu.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--dur) var(--ease);
+}
+
+.mobile-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.mobile-menu-head .logo {
+  font-size: 1.1rem;
+}
+
+.mobile-menu nav a {
+  display: block;
+  padding: 1rem 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 300;
+  text-decoration: none;
+  color: var(--espresso);
+  border-bottom: 1px solid var(--hairline);
+  transition: color var(--dur) var(--ease);
+}
+
+.mobile-menu nav a:hover {
+  color: var(--oxblood);
+}
+
+.mobile-menu-foot {
+  margin-top: auto;
+  padding-top: 2rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.mobile-menu-foot a {
+  color: var(--oxblood);
+  text-decoration: none;
+}
+
+
+/* ==========================================================================
+   10. HERO
+   ========================================================================== */
+
+.hero {
+  background: linear-gradient(155deg, var(--bone-light) 30%, var(--blush-soft) 72%, var(--blush) 100%);
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.hero-copy .lede {
+  margin: 1.5rem 0 2.25rem;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* Framed visual panel */
+.hero-visual {
+  position: relative;
+  max-width: 26rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.hero-frame {
+  position: relative;
+  border: 1px solid var(--hairline-strong);
+  padding: 0.9rem;
+  background-color: var(--bone-light);
+}
+
+/* Offset echo of the frame, for depth without shadow-heaviness */
+.hero-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(0.9rem, 0.9rem);
+  border: 1px solid var(--hairline);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-frame .product-media {
+  margin: 0;
+}
+
+.hero-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.85rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 4rem;
+  }
+  .hero-visual { margin-inline: 0 auto; }
+}
+
+
+/* ==========================================================================
+   11. SECTION HEADS
+   ========================================================================== */
+
+.section-head {
+  max-width: 38em;
+  margin-bottom: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.section-head--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: none;
+}
+
+.section-head--centre {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head p {
+  margin-top: 0.9rem;
+}
+
+
+/* ==========================================================================
+   12. PRODUCT CARDS & MEDIA
+   ========================================================================== */
+
+/*
+   .product-media holds a placeholder illustration today and a photograph
+   tomorrow: swap the inner <svg> for an <img> and nothing else changes.
+   The background tone lives on the figure, not in the artwork.
+*/
+.product-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--bone-light);
+}
+
+.product-media > svg,
+.product-media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: var(--espresso); /* illustrations stroke with currentColor */
+  transition: transform 0.8s var(--ease);
+}
+
+.media--blush      { background-color: var(--blush); }
+.media--blush-soft { background-color: var(--blush-soft); }
+.media--bone       { background-color: var(--bone-light); }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem 1.25rem;
+}
+
+@media (min-width: 760px) {
+  .product-grid { gap: 3rem 2rem; }
+}
+
+@media (min-width: 960px) {
+  .product-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .product-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.product-card {
+  position: relative;
+}
+
+.card-media-link {
+  display: block;
+  text-decoration: none;
+}
+
+.product-card:hover .product-media > svg,
+.product-card:hover .product-media > img,
+.card-media-link:focus-visible .product-media > svg,
+.card-media-link:focus-visible .product-media > img {
+  transform: scale(1.04);
+}
+
+.card-info {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.card-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.card-name a {
+  color: var(--espresso);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.card-name a:hover {
+  color: var(--oxblood);
+}
+
+.card-meta {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+.card-price {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-top: 0.4rem;
+  color: var(--oxblood);
+}
+
+/* Sold-out treatment for future drops */
+.card-flag {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background-color: var(--bone-light);
+  padding: 0.35rem 0.7rem;
+}
+
+/* --- Quick add ------------------------------------------------------- */
+
+.card-quickadd {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.product-card:hover .card-quickadd,
+.product-card:focus-within .card-quickadd,
+.card-quickadd.is-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* No hover on touch screens: keep quick add quietly visible */
+@media (hover: none) {
+  .card-quickadd {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.quickadd-toggle {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  background-color: var(--bone-light);
+  color: var(--espresso);
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.quickadd-toggle:hover {
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+}
+
+.quickadd-sizes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.55rem 0.5rem;
+  background-color: var(--bone-light);
+}
+
+.quickadd-sizes .quickadd-label {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding-bottom: 0.25rem;
+}
+
+.quickadd-sizes button {
+  min-width: 2rem;
+  padding: 0.3rem 0.2rem;
+  font-size: 0.7rem;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.quickadd-sizes button:hover {
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+}
+
+
+/* ==========================================================================
+   13. CATEGORY PANELS
+   ========================================================================== */
+
+.category-panels {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.category-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 24rem;
+  padding: 2.5rem;
+  overflow: hidden;
+  color: var(--espresso); /* the panel is a link — keep inherited text espresso */
+  text-decoration: none;
+}
+
+.category-panel--dresses {
+  background: linear-gradient(160deg, var(--blush-soft) 0%, var(--blush) 85%);
+}
+
+.category-panel--tops {
+  background: linear-gradient(200deg, var(--bone-light) 0%, var(--blush-soft) 90%);
+}
+
+/* The garment sketch floats behind the caption */
+.category-art {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem 1.5rem 6rem;
+  color: var(--espresso);
+  opacity: 0.85;
+  transition: transform 0.8s var(--ease);
+}
+
+.category-art svg {
+  height: 100%;
+  width: auto;
+}
+
+.category-panel:hover .category-art {
+  transform: scale(1.03);
+}
+
+.category-copy {
+  position: relative;
+  background-color: var(--bone-light);
+  padding: 1.5rem 1.75rem;
+  max-width: 21rem;
+}
+
+.category-copy h3 {
+  font-size: 1.5rem;
+}
+
+.category-copy p {
+  font-size: 0.85rem;
+  margin: 0.4rem 0 1.1rem;
+}
+
+@media (min-width: 760px) {
+  .category-panels {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .category-panel { min-height: 30rem; }
+}
+
+
+/* ==========================================================================
+   14. SIGNATURE STRIP
+   ========================================================================== */
+
+.signature-strip {
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+  text-align: center;
+}
+
+.signature-strip .eyebrow {
+  color: var(--rose);
+}
+
+.signature-strip h2 {
+  font-style: italic;
+  max-width: 18em;
+  margin-inline: auto;
+}
+
+.signature-strip p {
+  max-width: 36em;
+  margin: 1.25rem auto 0;
+  font-size: 0.95rem;
+  color: var(--bone);
+}
+
+
+/* ==========================================================================
+   15. REVIEWS
+   ========================================================================== */
+
+.reviews-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.review {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* Hand-drawn double quotation mark, in soft rose */
+.review-quote-mark {
+  width: 2.1rem;
+  height: auto;
+  margin: 0 auto 1.25rem;
+  color: var(--rose);
+}
+
+.review blockquote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.review figcaption {
+  margin-top: 1.25rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.review figcaption span {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--oxblood);
+}
+
+@media (min-width: 760px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+
+/* ==========================================================================
+   16. BRAND STORY
+   ========================================================================== */
+
+.story {
+  background: linear-gradient(180deg, var(--bone) 0%, var(--blush-soft) 100%);
+}
+
+.story-inner {
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.story-inner h2 {
+  margin-bottom: 1.5rem;
+}
+
+.story-inner p + p {
+  margin-top: 1.1rem;
+}
+
+.story-signature {
+  margin-top: 2.25rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.45rem;
+  color: var(--oxblood);
+}
+
+
+/* ==========================================================================
+   17. NEWSLETTER
+   ========================================================================== */
+
+.newsletter {
+  border-top: 1px solid var(--hairline);
+}
+
+.newsletter-inner {
+  max-width: 34rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.newsletter p {
+  margin-top: 0.9rem;
+}
+
+.newsletter-form {
+  display: flex;
+  margin-top: 2rem;
+  border-bottom: 1px solid var(--hairline-strong);
+  transition: border-color var(--dur) var(--ease);
+}
+
+.newsletter-form:focus-within {
+  border-color: var(--oxblood);
+}
+
+.newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.9rem 0.25rem;
+  letter-spacing: 0.04em;
+}
+
+.newsletter-form button {
+  flex-shrink: 0;
+  padding: 0.9rem 0 0.9rem 1.25rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  color: var(--oxblood);
+  transition: color var(--dur) var(--ease);
+}
+
+.newsletter-form button:hover {
+  color: var(--oxblood-pressed);
+}
+
+.newsletter-note {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+
+/* Replaces the form once submitted */
+.newsletter-thanks {
+  margin-top: 2rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--oxblood);
+}
+
+
+/* ==========================================================================
+   18. FOOTER
+   ========================================================================== */
+
+.site-footer {
+  background-color: var(--bone-light);
+  border-top: 1px solid var(--hairline);
+  padding-top: var(--space-section);
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.footer-brand .logo {
+  font-size: 1.15rem;
+}
+
+.footer-brand p {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  max-width: 22em;
+}
+
+.footer-col h3 {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.footer-col ul li + li {
+  margin-top: 0.6rem;
+}
+
+.footer-col a {
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--espresso);
+  transition: color var(--dur) var(--ease);
+}
+
+.footer-col a:hover {
+  color: var(--oxblood);
+}
+
+.footer-base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-social a {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--espresso);
+  transition: color var(--dur) var(--ease);
+}
+
+.footer-social a:hover {
+  color: var(--oxblood);
+}
+
+@media (min-width: 760px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+
+/* ==========================================================================
+   19. SCRIM & BAG DRAWER
+   ========================================================================== */
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: var(--scrim);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+
+.scrim.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.bag-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  width: min(26rem, 94vw);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bone-light);
+  transform: translateX(102%);
+  visibility: hidden;
+  transition: transform var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+
+.bag-drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--dur) var(--ease);
+}
+
+.bag-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem var(--gutter) 1.2rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.bag-head h2 {
+  font-size: 1.4rem;
+}
+
+/* Progress toward free shipping */
+.bag-shipping {
+  padding: 0.9rem var(--gutter);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  background-color: var(--blush-soft);
+}
+
+.bag-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem var(--gutter);
+}
+
+.bag-item {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.bag-item-media {
+  aspect-ratio: 3 / 4;
+  background-color: var(--blush-soft);
+  overflow: hidden;
+}
+
+.bag-item-media svg {
+  width: 100%;
+  height: 100%;
+  color: var(--espresso);
+}
+
+.bag-item-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.bag-item-meta {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.bag-item-price {
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.bag-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  margin-top: 0.7rem;
+  border: 1px solid var(--hairline);
+}
+
+.bag-qty button {
+  width: 1.8rem;
+  height: 1.8rem;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: color var(--dur) var(--ease);
+}
+
+.bag-qty button:hover {
+  color: var(--oxblood);
+}
+
+.bag-qty span {
+  min-width: 1.4rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.bag-item-remove {
+  display: block;
+  margin-top: 0.9rem;
+  margin-left: auto;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  color: var(--espresso);
+  transition: color var(--dur) var(--ease);
+}
+
+.bag-item-remove:hover {
+  color: var(--oxblood);
+}
+
+.bag-empty {
+  padding: 3.5rem var(--gutter);
+  text-align: center;
+}
+
+.bag-empty p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  margin-bottom: 1.75rem;
+}
+
+.bag-foot {
+  padding: 1.25rem var(--gutter) 1.75rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.bag-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.bag-note {
+  font-size: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+
+/* ==========================================================================
+   20. PRODUCT DETAIL PAGE
+   ========================================================================== */
+
+.breadcrumb {
+  padding-top: 1.75rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.breadcrumb a {
+  color: var(--espresso);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--oxblood);
+}
+
+.breadcrumb [aria-hidden="true"] {
+  margin-inline: 0.5rem;
+  color: var(--smoke); /* decorative separator */
+}
+
+.product-layout {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: 1.75rem var(--space-section);
+}
+
+@media (min-width: 960px) {
+  .product-layout {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 4.5rem;
+  }
+}
+
+/* --- Gallery ---------------------------------------------------------- */
+
+.gallery-main .product-media {
+  aspect-ratio: 3 / 4;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.gallery-thumb {
+  width: 4.5rem;
+  padding: 0;
+  border: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.gallery-thumb .product-media {
+  aspect-ratio: 3 / 4;
+}
+
+.gallery-thumb[aria-current="true"] {
+  border-color: var(--oxblood);
+}
+
+.gallery-thumb:hover {
+  border-color: var(--hairline-strong);
+}
+
+/* --- Purchase column --------------------------------------------------- */
+
+.product-info .eyebrow {
+  margin-bottom: 0.6rem;
+}
+
+.product-title {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+  color: var(--oxblood);
+}
+
+.option-group {
+  margin-top: 1.75rem;
+}
+
+.option-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.option-label .option-value {
+  letter-spacing: 0.08em;
+  text-transform: none;
+  font-style: italic;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+}
+
+.size-guide-link {
+  color: var(--oxblood);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  letter-spacing: 0.1em;
+}
+
+/* Colour swatches */
+.swatch-list {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.swatch {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--hairline-strong);
+  padding: 0.2rem;
+  background-clip: content-box;
+  transition: border-color var(--dur) var(--ease);
+}
+
+.swatch[aria-pressed="true"] {
+  border-color: var(--oxblood);
+}
+
+/* Size pills */
+.size-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.size-option {
+  min-width: 3rem;
+  padding: 0.65rem 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  border: 1px solid var(--hairline);
+  transition: border-color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.size-option:hover {
+  border-color: var(--espresso);
+}
+
+.size-option[aria-pressed="true"] {
+  background-color: var(--oxblood);
+  border-color: var(--oxblood);
+  color: var(--bone-light);
+}
+
+.size-hint {
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  color: var(--oxblood);
+}
+
+.add-to-bag {
+  margin-top: 2rem;
+}
+
+/* Confirmation flash after adding */
+.add-confirm {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--oxblood);
+}
+
+.trust-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 1.75rem;
+  padding: 1.1rem 1.25rem;
+  background-color: var(--blush-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.trust-line li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Small drawn diamond bullet */
+.trust-line li::before {
+  content: "";
+  width: 0.32rem;
+  height: 0.32rem;
+  flex-shrink: 0;
+  background-color: var(--oxblood);
+  transform: rotate(45deg);
+}
+
+/* --- Accordions --------------------------------------------------------- */
+
+.accordions {
+  margin-top: 2.25rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.accordion {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 0;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  text-align: left;
+  transition: color var(--dur) var(--ease);
+}
+
+.accordion-trigger:hover {
+  color: var(--oxblood);
+}
+
+/* Drawn plus that rotates to a cross-less minus */
+.accordion-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.accordion-icon::before,
+.accordion-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background-color: currentColor;
+  transition: transform var(--dur) var(--ease);
+}
+
+.accordion-icon::before {
+  width: 100%;
+  height: 1px;
+}
+
+.accordion-icon::after {
+  width: 1px;
+  height: 100%;
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-icon::after {
+  transform: scaleY(0);
+}
+
+.accordion-panel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--dur) var(--ease);
+}
+
+.accordion-body {
+  padding: 0.25rem 0 1.5rem;
+  font-size: 0.9rem;
+}
+
+.accordion-body p + p,
+.accordion-body table,
+.accordion-body p + ul {
+  margin-top: 0.9rem;
+}
+
+.accordion-body ul {
+  padding-left: 1.1rem;
+}
+
+.accordion-body li + li {
+  margin-top: 0.35rem;
+}
+
+/* Measurements table */
+.fit-table {
+  font-size: 0.8rem;
+}
+
+.fit-table caption {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding-bottom: 0.6rem;
+}
+
+.fit-table th,
+.fit-table td {
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+  border: 1px solid var(--hairline);
+  font-weight: 300;
+}
+
+.fit-table thead th {
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  background-color: var(--blush-soft);
+}
+
+.fit-table tbody th {
+  font-weight: 400;
+  background-color: var(--bone-light);
+}
+
+.fit-note {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+
+/* --- Complete the look --------------------------------------------------- */
+
+.related {
+  border-top: 1px solid var(--hairline);
+}
+
+
+/* ==========================================================================
+   21. COLLECTION PAGE
+   ========================================================================== */
+
+.collection-head {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+  text-align: center;
+}
+
+.collection-head p {
+  max-width: 34em;
+  margin: 1rem auto 0;
+}
+
+/* Filter & sort toolbar */
+.toolbar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.4rem;
+  margin-block: clamp(2rem, 5vw, 3rem);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.toolbar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toolbar-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-right: 0.25rem;
+}
+
+.toolbar-sort {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.results-count {
+  width: 100%;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+@media (min-width: 760px) {
+  .results-count { width: auto; }
+}
+
+/* Clear-filters link, shown only when filters bite */
+.clear-filters {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  color: var(--oxblood);
+}
+
+.clear-filters:hover {
+  color: var(--oxblood-pressed);
+}
+
+/* Empty state when filters exclude everything */
+.no-results {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.no-results p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.collection-grid {
+  padding-bottom: var(--space-section);
+}
+
+/* Editor's note tucked beneath the grid */
+.collection-note {
+  max-width: 30rem;
+  margin: 0 auto;
+  padding-bottom: var(--space-section);
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+
+/* ==========================================================================
+   22. FOCUS STATES, MOTION & ACCESSIBILITY
+   ========================================================================== */
+
+/* Visible focus, always in the signature oxblood */
+:focus-visible {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 3px;
+}
+
+/* On oxblood surfaces the ring flips to bone for contrast */
+.announcement :focus-visible,
+.signature-strip :focus-visible,
+.btn--primary:focus-visible {
+  outline-color: var(--bone-light);
+  outline-offset: 2px;
+}
+
+/* Respect reduced-motion preferences: remove movement, keep state changes */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .product-card:hover .product-media > svg,
+  .product-card:hover .product-media > img,
+  .category-panel:hover .category-art {
+    transform: none;
+  }
+}
