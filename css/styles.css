@@ -366,6 +366,26 @@ input::placeholder {
   border-top: 1px solid var(--hairline);
 }
 
+/* Skip-to-content link — hidden until focused, then drops in at the top */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.72rem;
+  letter-spacing: var(--track-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: var(--oxblood);
+  color: var(--bone-light);
+}
+
+.skip-link:focus-visible {
+  top: 0;
+}
+
 
 /* ==========================================================================
    07. ANNOUNCEMENT BAR
@@ -1710,7 +1730,6 @@ input::placeholder {
 
 .fit-note {
   margin-top: 0.8rem;
-  font-size: 0.78rem;
   font-style: italic;
   font-family: var(--font-display);
   font-size: 0.95rem;
@@ -1835,10 +1854,11 @@ input::placeholder {
   outline-offset: 3px;
 }
 
-/* On oxblood surfaces the ring flips to bone for contrast */
+/* On oxblood surfaces the ring flips to bone for contrast.
+   (.btn--primary keeps the oxblood ring — its outline is drawn over the
+   page background, not the button, and the offset gap keeps it visible.) */
 .announcement :focus-visible,
-.signature-strip :focus-visible,
-.btn--primary:focus-visible {
+.signature-strip :focus-visible {
   outline-color: var(--bone-light);
   outline-offset: 2px;
 }

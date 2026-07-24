@@ -211,6 +211,10 @@
     if (!openPanel) return;
     openPanel.classList.remove('is-open');
     openPanel.setAttribute('aria-hidden', 'true');
+    // If the closing panel was the mobile menu, sync the hamburger state
+    if (openPanel.id === 'mobile-menu' && menuBtn) {
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
     openPanel = null;
     if (!keepScrim) {
       if (scrim) scrim.classList.remove('is-visible');
@@ -253,13 +257,11 @@
       open(mobileMenu);
       menuBtn.setAttribute('aria-expanded', 'true');
     });
-    var menuClose = qs('[data-menu-close]', mobileMenu);
-    if (menuClose) {
-      menuClose.addEventListener('click', function () {
-        close();
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    }
+    // Close button and any in-menu links marked data-menu-close
+    // (same-page anchors don't reload, so the menu must close itself)
+    qsa('[data-menu-close]').forEach(function (el) {
+      el.addEventListener('click', function () { close(); });
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -412,8 +414,9 @@
     });
   });
 
-  var bagClose = qs('[data-bag-close]');
-  if (bagClose) bagClose.addEventListener('click', function () { close(); });
+  qsa('[data-bag-close]').forEach(function (el) {
+    el.addEventListener('click', function () { close(); });
+  });
 
   renderBag();
 
