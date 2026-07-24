@@ -19,7 +19,7 @@
             {%- if feat != blank and feat.featured_media -%}
               {{ feat.featured_media | image_url: width: 720 | image_tag: widths: '360, 540, 720', sizes: '(min-width: 960px) 30vw, 90vw', alt: feat.title }}
             {%- else -%}
-              <svg viewBox="0 0 360 480" role="img" aria-label="{{ section.settings.image_alt | default: 'Featured garment illustration' }}"><use href="#illo-{{ section.settings.illustration }}"/></svg>
+              <svg viewBox="0 0 360 480" role="img" aria-label="{{ section.settings.image_alt | default: 'Example image' }}"><use href="#illo-{{ section.settings.illustration }}"/></svg>
             {%- endif -%}
           </figure>
           {%- if feat != blank -%}
@@ -54,24 +54,24 @@
     { "type": "header", "content": "Featured visual" },
     { "type": "product", "id": "featured_product", "label": "Featured product (uses its image if set)" },
     { "type": "text", "id": "vertical_caption", "label": "Vertical caption", "default": "Drop 01 · Spring" },
-    { "type": "text", "id": "caption_name", "label": "Fallback caption name", "default": "The Vesper Dress" },
-    { "type": "text", "id": "caption_price", "label": "Fallback caption price", "default": "£64" },
+    { "type": "text", "id": "caption_name", "label": "Fallback caption name", "default": "Example item" },
+    { "type": "text", "id": "caption_price", "label": "Fallback caption price", "default": "£00" },
     {
       "type": "select", "id": "illustration", "label": "Placeholder illustration", "default": "vesper",
       "options": [
-        { "value": "vesper", "label": "Vesper (cowl dress)" },
-        { "value": "chapel", "label": "Chapel (column dress)" },
-        { "value": "encore", "label": "Encore (halter top)" },
-        { "value": "aria", "label": "Aria (corset top)" }
+        { "value": "vesper", "label": "Dress — cowl" },
+        { "value": "chapel", "label": "Dress — column" },
+        { "value": "encore", "label": "Top — halter" },
+        { "value": "aria", "label": "Top — corset" }
       ]
     },
     {
       "type": "select", "id": "illustration_detail", "label": "Placeholder detail illustration", "default": "vesper-detail",
       "options": [
-        { "value": "vesper-detail", "label": "Vesper detail" },
-        { "value": "chapel-detail", "label": "Chapel detail" },
-        { "value": "encore-detail", "label": "Encore detail" },
-        { "value": "aria-detail", "label": "Aria detail" }
+        { "value": "vesper-detail", "label": "Dress — cowl (detail)" },
+        { "value": "chapel-detail", "label": "Dress — column (detail)" },
+        { "value": "encore-detail", "label": "Top — halter (detail)" },
+        { "value": "aria-detail", "label": "Top — corset (detail)" }
       ]
     }
   ],

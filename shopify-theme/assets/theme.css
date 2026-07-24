@@ -2229,3 +2229,74 @@ input::placeholder {
   color: var(--text);
   font-size: 0.72rem;
 }
+
+/* ==========================================================================
+   24. IMAGE BANNER (sections/image-banner.liquid)
+   Full-width image with heading + buttons over an overlay wash.
+   ========================================================================== */
+.image-banner {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+}
+.image-banner--small  { min-height: 58vh; }
+.image-banner--medium { min-height: 74vh; }
+.image-banner--large  { min-height: 90vh; }
+
+.image-banner__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.image-banner__media img,
+.image-banner__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Overlay tint — light wash for dark text, dark scrim for light text */
+.image-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg);
+}
+.image-banner.text-light .image-banner__overlay {
+  background-color: #17110F;
+}
+
+.image-banner__content {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  width: 100%;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+.image-banner__content.align-center {
+  text-align: center;
+}
+.image-banner__inner {
+  max-width: 40rem;
+}
+.image-banner__content.align-center .image-banner__inner {
+  margin-inline: auto;
+}
+.image-banner__heading {
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  margin-bottom: 0.5rem;
+}
+.image-banner .lede {
+  margin: 1.25rem 0 2rem;
+}
+
+/* Light-text variant: flip copy + ghost button to cream on the dark scrim */
+.image-banner.text-light,
+.image-banner.text-light .image-banner__heading {
+  color: var(--cream);
+}
+.image-banner.text-light .btn--ghost {
+  color: var(--cream);
+  border-color: var(--hairline-cream);
+}
+.image-banner.text-light .btn--ghost:hover {
+  border-color: var(--cream);
+}

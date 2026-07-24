@@ -11,8 +11,8 @@
     "category-panels": {
       "type": "category-panels",
       "blocks": {
-        "dresses": { "type": "panel", "settings": { "heading": "Dresses", "text": "Bias cuts and cowl necks in satin with real weight. £55–70.", "link_text": "Shop dresses", "modifier": "category-panel--dresses", "illustration": "chapel" } },
-        "tops": { "type": "panel", "settings": { "heading": "Going-Out Tops", "text": "Halters, corsets and structure that holds until last orders. £30–40.", "link_text": "Shop tops", "modifier": "category-panel--tops", "illustration": "aria" } }
+        "dresses": { "type": "panel", "settings": { "heading": "Dresses", "text": "Example description — add your own.", "link_text": "Shop dresses", "modifier": "category-panel--dresses", "illustration": "chapel" } },
+        "tops": { "type": "panel", "settings": { "heading": "Going-Out Tops", "text": "Example description — add your own.", "link_text": "Shop tops", "modifier": "category-panel--tops", "illustration": "aria" } }
       },
       "block_order": ["dresses", "tops"],
       "settings": {}
@@ -21,9 +21,9 @@
     "reviews": {
       "type": "reviews",
       "blocks": {
-        "r1": { "type": "review", "settings": { "quote": "The first dress under £100 that hangs like it cost three times that. I’ve stopped explaining where it’s from — I just let people guess high.", "name": "Amelia R.", "meta": "The Vesper Dress · UK 10" } },
-        "r2": { "type": "review", "settings": { "quote": "Wore the Aria to a thirtieth and it didn’t move an inch all night. Proper boning, proper lacing.", "name": "Deja M.", "meta": "The Aria Top · UK 14" } },
-        "r3": { "type": "review", "settings": { "quote": "Ordered Thursday, wedding Saturday. The Chapel arrived Friday, steamed out in ten minutes, and photographed like liquid.", "name": "Sophie L.", "meta": "The Chapel Dress · UK 8" } }
+        "r1": { "type": "review", "settings": { "quote": "Example review — replace with a real customer quote.", "name": "Reviewer name", "meta": "Example item" } },
+        "r2": { "type": "review", "settings": { "quote": "Example review — replace with a real customer quote.", "name": "Reviewer name", "meta": "Example item" } },
+        "r3": { "type": "review", "settings": { "quote": "Example review — replace with a real customer quote.", "name": "Reviewer name", "meta": "Example item" } }
       },
       "block_order": ["r1", "r2", "r3"],
       "settings": {}
