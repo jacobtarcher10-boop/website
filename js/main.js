@@ -462,6 +462,58 @@
   });
 
   /* ------------------------------------------------------------------------
+     The founding edit: quiet-luxury index (homepage, ≥960px)
+     Hovering or focusing a row swaps the featured panel beside the list.
+     ---------------------------------------------------------------------- */
+
+  var showcase = qs('[data-edit-showcase]');
+
+  if (showcase) {
+    var editRows = qsa('[data-edit-item]', showcase);
+    var editPreviews = qsa('[data-edit-preview]', showcase);
+
+    var activateEdit = function (id) {
+      editRows.forEach(function (row) {
+        row.classList.toggle('is-active', row.getAttribute('data-edit-item') === id);
+      });
+      editPreviews.forEach(function (panel) {
+        panel.classList.toggle('is-active', panel.getAttribute('data-edit-preview') === id);
+      });
+    };
+
+    editRows.forEach(function (row) {
+      var id = row.getAttribute('data-edit-item');
+      row.addEventListener('mouseenter', function () { activateEdit(id); });
+      row.addEventListener('focus', function () { activateEdit(id); });
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     Fade-up reveals on scroll
+     Only armed when IntersectionObserver exists and the user hasn't asked
+     for reduced motion; otherwise content is simply visible.
+     ---------------------------------------------------------------------- */
+
+  var revealTargets = qsa('[data-reveal]');
+
+  if (
+    revealTargets.length &&
+    'IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    document.body.classList.add('has-reveal');
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealTargets.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  /* ------------------------------------------------------------------------
      Accordions (product page)
      ---------------------------------------------------------------------- */
 

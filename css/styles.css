@@ -655,12 +655,69 @@ input::placeholder {
   text-transform: uppercase;
 }
 
+/* --- Editorial collage ---------------------------------------------------
+   Main frame + smaller overlapping detail frame over a soft circular wash,
+   with a vertical drop caption running up the right edge. */
+
+.hero-collage {
+  position: relative;
+  padding: 1.5rem 1.5rem 2.75rem 2.25rem;
+}
+
+/* Soft blush disc behind the frames */
+.hero-wash {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.75rem;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, var(--blush) 0%, var(--blush-soft) 70%, transparent 72%);
+  pointer-events: none;
+}
+
+.hero-frame--main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Overlapping detail frame, lower left — sits clear of the main caption */
+.hero-frame--detail {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  bottom: 4.75rem;
+  width: 42%;
+  padding: 0.55rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-frame--detail::after {
+  content: none; /* no echo on the small frame — one is enough */
+}
+
+/* Vertical drop caption along the right edge */
+.hero-vertical {
+  position: absolute;
+  top: 50%;
+  right: -0.4rem;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--rose); /* decorative — repeats the eyebrow above */
+  white-space: nowrap;
+}
+
 @media (min-width: 960px) {
   .hero-inner {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: 4rem;
   }
   .hero-visual { margin-inline: 0 auto; }
+  .hero-collage { padding: 2rem 2rem 3.25rem 3rem; }
+  .hero-vertical { right: -0.2rem; }
 }
 
 
@@ -685,6 +742,16 @@ input::placeholder {
 .section-head--centre {
   margin-inline: auto;
   text-align: center;
+}
+
+/* Short hairline ornament beneath centred heads — invitation-card cadence */
+.section-head--centre h2::after {
+  content: "";
+  display: block;
+  width: 2.75rem;
+  height: 1px;
+  margin: 1.4rem auto 0;
+  background-color: var(--hairline-strong);
 }
 
 .section-head p {
@@ -755,6 +822,16 @@ input::placeholder {
 .card-info {
   padding-top: 1rem;
   text-align: center;
+}
+
+/* Editorial index number above the name — decorative, aria-hidden */
+.card-num {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  color: var(--rose);
+  margin-bottom: 0.45rem;
 }
 
 .card-name {
@@ -878,6 +955,104 @@ input::placeholder {
 }
 
 
+/* --- The founding edit: quiet-luxury index ------------------------------
+   Desktop only: a numbered list of the drop; hovering or focusing a row
+   swaps the featured panel beside it. Below 960px the card grid shows
+   instead (the .edit-showcase is display:none). -------------------------- */
+
+.edit-showcase {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .edit-showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* The showcase replaces the grid at desktop widths */
+  .edit-showcase + .product-grid--4 {
+    display: none;
+  }
+}
+
+.edit-list {
+  border-top: 1px solid var(--hairline);
+}
+
+.edit-row {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr auto;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.5rem 0.5rem;
+  text-decoration: none;
+  color: var(--espresso);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.edit-num {
+  font-size: 0.65rem;
+  letter-spacing: 0.32em;
+  color: var(--rose); /* decorative index */
+}
+
+.edit-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  transition: color var(--dur) var(--ease), font-style 0s;
+}
+
+.edit-row:hover .edit-name,
+.edit-row.is-active .edit-name {
+  color: var(--oxblood);
+  font-style: italic;
+}
+
+.edit-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  text-align: right;
+}
+
+.edit-meta {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.edit-price {
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--oxblood);
+}
+
+/* Featured panel: stacked figures, the active one fades in */
+.edit-preview {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  max-height: 34rem;
+}
+
+.edit-preview .product-media {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+
+.edit-preview .product-media.is-active {
+  opacity: 1;
+}
+
+
 /* ==========================================================================
    13. CATEGORY PANELS
    ========================================================================== */
@@ -962,6 +1137,13 @@ input::placeholder {
   background-color: var(--oxblood);
   color: var(--bone-light);
   text-align: center;
+}
+
+/* Hairline invitation border inside the strip */
+.signature-strip .container {
+  max-width: 56rem;
+  border: 1px solid var(--hairline-bone);
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .signature-strip .eyebrow {
@@ -1863,6 +2045,26 @@ input::placeholder {
   outline-offset: 2px;
 }
 
+/* Soft fade-up reveal on scroll.
+   JS adds .has-reveal to <body> only when IntersectionObserver exists AND
+   the user has not asked for reduced motion — without it, everything is
+   simply visible. */
+.has-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(1.1rem);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.has-reveal [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Gentle stagger for cards revealed inside a grid */
+.has-reveal .product-grid [data-reveal]:nth-child(2) { transition-delay: 0.08s; }
+.has-reveal .product-grid [data-reveal]:nth-child(3) { transition-delay: 0.16s; }
+.has-reveal .product-grid [data-reveal]:nth-child(4) { transition-delay: 0.24s; }
+
 /* Respect reduced-motion preferences: remove movement, keep state changes */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -1880,6 +2082,12 @@ input::placeholder {
   .product-card:hover .product-media > svg,
   .product-card:hover .product-media > img,
   .category-panel:hover .category-art {
+    transform: none;
+  }
+
+  /* Belt and braces: reveal targets are always visible under reduced motion */
+  .has-reveal [data-reveal] {
+    opacity: 1;
     transform: none;
   }
 }

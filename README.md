@@ -21,8 +21,10 @@ python3 -m http.server 8000
 ## File structure
 
 ```
-├── index.html        Homepage — hero, founding edit, categories, signature
-│                     strip, reviews, story, email capture
+├── index.html        Homepage — editorial collage hero, founding edit
+│                     (numbered index with hover-swap preview on desktop,
+│                     card grid below 960px), categories, signature strip,
+│                     reviews, story, email capture
 ├── collection.html   Collection template — filter bar (size / colour / price),
 │                     sort dropdown, responsive grid.
 │                     Accepts ?cat=dresses or ?cat=tops to pre-filter.
@@ -126,7 +128,24 @@ wordmark and UI (`--track-logo`, `--track-ui`) sits next to them.
 - The mobile menu and bag drawer trap focus, close on `Esc`, and return focus
   to their trigger.
 - `prefers-reduced-motion` removes all movement, keeping state changes.
+  The scroll-reveal fades are only armed when the user has *not* asked for
+  reduced motion (and IntersectionObserver exists); otherwise content is
+  simply visible.
 - Breakpoints at 520px, 760px and 960px, mobile-first.
+
+## Design notes
+
+The homepage uses three editorial patterns adapted from 21st.dev references,
+rebuilt in vanilla HTML/CSS to stay on-palette and dependency-free:
+
+- **Collage hero** — a main framed panel with a smaller overlapping detail
+  frame over a soft blush wash, plus a vertical drop caption.
+- **Quiet-luxury index** (`.edit-showcase`, ≥960px) — the founding edit as a
+  numbered list; hovering or focusing a row cross-fades the featured panel.
+  Below 960px the standard card grid shows instead.
+- **Editorial finishing** — index numbers on product cards, a hairline
+  ornament under centred section heads, and an invitation-style hairline
+  border inside the oxblood signature strip.
 
 ## Porting to Shopify later
 

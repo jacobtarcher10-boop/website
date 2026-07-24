@@ -295,7 +295,7 @@
          ================================================================== -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-inner">
-        <div class="hero-copy">
+        <div class="hero-copy" data-reveal>
           <span class="eyebrow">Rose Archer · The founding drop</span>
           <h1 id="hero-title">Dressed for <span class="accent-italic">the nights that count.</span></h1>
           <p class="lede">Occasion dresses and going-out tops, released in small limited drops. Fabric that hangs properly, fit that was actually fitted — at prices that don’t need a payday. When a piece is gone, it’s gone.</p>
@@ -305,15 +305,25 @@
           </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="hero-frame">
-            <!-- Placeholder illustration — swap the <svg> for an <img> when photography exists -->
-            <figure class="product-media media--blush">
-              <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Vesper dress — a cowl-neck satin slip midi">
-                <use href="#illo-vesper"/>
-              </svg>
-            </figure>
-            <p class="hero-caption"><span>The Vesper Dress</span> <span>£64</span></p>
+        <div class="hero-visual" data-reveal>
+          <!-- Editorial collage: main frame + overlapping detail frame over a soft wash -->
+          <div class="hero-collage">
+            <span class="hero-wash" aria-hidden="true"></span>
+            <div class="hero-frame hero-frame--main">
+              <!-- Placeholder illustration — swap the <svg> for an <img> when photography exists -->
+              <figure class="product-media media--blush">
+                <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Vesper dress — a cowl-neck satin slip midi">
+                  <use href="#illo-vesper"/>
+                </svg>
+              </figure>
+              <p class="hero-caption"><span>The Vesper Dress</span> <span>£64</span></p>
+            </div>
+            <div class="hero-frame hero-frame--detail" aria-hidden="true">
+              <figure class="product-media media--blush-soft">
+                <svg viewBox="0 0 360 480"><use href="#illo-vesper-detail"/></svg>
+              </figure>
+            </div>
+            <span class="hero-vertical" aria-hidden="true">Drop 01 · Spring</span>
           </div>
         </div>
       </div>
@@ -332,9 +342,70 @@
           <a class="text-link" href="collection.html">View the drop</a>
         </div>
 
+        <!-- ≥960px: quiet-luxury index — hovering or focusing a row swaps the
+             featured panel. Below 960px the card grid beneath shows instead. -->
+        <div class="edit-showcase" data-edit-showcase data-reveal>
+          <ol class="edit-list" role="list">
+            <li>
+              <a class="edit-row is-active" href="product.html?p=vesper" data-edit-item="vesper">
+                <span class="edit-num" aria-hidden="true">01</span>
+                <span class="edit-name">The Vesper Dress</span>
+                <span class="edit-detail">
+                  <span class="edit-meta">Oxblood satin · cowl neck</span>
+                  <span class="edit-price">£64</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="edit-row" href="product.html?p=chapel" data-edit-item="chapel">
+                <span class="edit-num" aria-hidden="true">02</span>
+                <span class="edit-name">The Chapel Dress</span>
+                <span class="edit-detail">
+                  <span class="edit-meta">Bone satin · bias column</span>
+                  <span class="edit-price">£68</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="edit-row" href="product.html?p=encore" data-edit-item="encore">
+                <span class="edit-num" aria-hidden="true">03</span>
+                <span class="edit-name">The Encore Top</span>
+                <span class="edit-detail">
+                  <span class="edit-meta">Espresso velvet · halter</span>
+                  <span class="edit-price">£36</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="edit-row" href="product.html?p=aria" data-edit-item="aria">
+                <span class="edit-num" aria-hidden="true">04</span>
+                <span class="edit-name">The Aria Top</span>
+                <span class="edit-detail">
+                  <span class="edit-meta">Blush satin · boned corset</span>
+                  <span class="edit-price">£38</span>
+                </span>
+              </a>
+            </li>
+          </ol>
+          <div class="edit-preview" aria-hidden="true">
+            <figure class="product-media media--blush is-active" data-edit-preview="vesper">
+              <svg viewBox="0 0 360 480"><use href="#illo-vesper"/></svg>
+            </figure>
+            <figure class="product-media media--blush-soft" data-edit-preview="chapel">
+              <svg viewBox="0 0 360 480"><use href="#illo-chapel"/></svg>
+            </figure>
+            <figure class="product-media media--blush" data-edit-preview="encore">
+              <svg viewBox="0 0 360 480"><use href="#illo-encore"/></svg>
+            </figure>
+            <figure class="product-media media--blush-soft" data-edit-preview="aria">
+              <svg viewBox="0 0 360 480"><use href="#illo-aria"/></svg>
+            </figure>
+          </div>
+        </div>
+
         <div class="product-grid product-grid--4">
 
-          <article class="product-card" data-product="vesper">
+          <article class="product-card" data-product="vesper" data-reveal>
             <a class="card-media-link" href="product.html?p=vesper">
               <figure class="product-media media--blush">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Vesper dress — a cowl-neck satin slip midi">
@@ -349,13 +420,14 @@
               </div>
             </div>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">01</span>
               <h3 class="card-name"><a href="product.html?p=vesper">The Vesper Dress</a></h3>
               <p class="card-meta">Oxblood satin · cowl neck</p>
               <p class="card-price">£64</p>
             </div>
           </article>
 
-          <article class="product-card" data-product="chapel">
+          <article class="product-card" data-product="chapel" data-reveal>
             <a class="card-media-link" href="product.html?p=chapel">
               <figure class="product-media media--blush-soft">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Chapel dress — a bias-cut satin column">
@@ -370,13 +442,14 @@
               </div>
             </div>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">02</span>
               <h3 class="card-name"><a href="product.html?p=chapel">The Chapel Dress</a></h3>
               <p class="card-meta">Bone satin · bias column</p>
               <p class="card-price">£68</p>
             </div>
           </article>
 
-          <article class="product-card" data-product="encore">
+          <article class="product-card" data-product="encore" data-reveal>
             <a class="card-media-link" href="product.html?p=encore">
               <figure class="product-media media--blush">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Encore top — a velvet halterneck">
@@ -391,13 +464,14 @@
               </div>
             </div>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">03</span>
               <h3 class="card-name"><a href="product.html?p=encore">The Encore Top</a></h3>
               <p class="card-meta">Espresso velvet · halter</p>
               <p class="card-price">£36</p>
             </div>
           </article>
 
-          <article class="product-card" data-product="aria">
+          <article class="product-card" data-product="aria" data-reveal>
             <a class="card-media-link" href="product.html?p=aria">
               <figure class="product-media media--blush-soft">
                 <svg viewBox="0 0 360 480" role="img" aria-label="Line illustration of the Aria top — a boned satin corset">
@@ -412,6 +486,7 @@
               </div>
             </div>
             <div class="card-info">
+              <span class="card-num" aria-hidden="true">04</span>
               <h3 class="card-name"><a href="product.html?p=aria">The Aria Top</a></h3>
               <p class="card-meta">Blush satin · boned corset</p>
               <p class="card-price">£38</p>
@@ -428,7 +503,7 @@
     <section class="section" aria-label="Shop by category" style="padding-top:0">
       <div class="container category-panels">
 
-        <a class="category-panel category-panel--dresses card-media-link" href="collection.html?cat=dresses">
+        <a class="category-panel category-panel--dresses card-media-link" href="collection.html?cat=dresses" data-reveal>
           <div class="category-art" aria-hidden="true">
             <svg viewBox="0 0 360 480"><use href="#illo-chapel"/></svg>
           </div>
@@ -439,7 +514,7 @@
           </div>
         </a>
 
-        <a class="category-panel category-panel--tops card-media-link" href="collection.html?cat=tops">
+        <a class="category-panel category-panel--tops card-media-link" href="collection.html?cat=tops" data-reveal>
           <div class="category-art" aria-hidden="true">
             <svg viewBox="0 0 360 480"><use href="#illo-aria"/></svg>
           </div>
@@ -475,7 +550,7 @@
         </div>
 
         <div class="reviews-grid">
-          <figure class="review">
+          <figure class="review" data-reveal>
             <svg class="review-quote-mark" viewBox="0 0 48 32" aria-hidden="true"><use href="#quote-mark"/></svg>
             <blockquote>
               <p>The Vesper is the first dress under £100 that hangs like it cost three times that. I’ve stopped explaining where it’s from — I just let people guess high.</p>
@@ -483,7 +558,7 @@
             <figcaption>Amelia R. <span>The Vesper Dress · UK 10</span></figcaption>
           </figure>
 
-          <figure class="review">
+          <figure class="review" data-reveal>
             <svg class="review-quote-mark" viewBox="0 0 48 32" aria-hidden="true"><use href="#quote-mark"/></svg>
             <blockquote>
               <p>Wore the Aria to a thirtieth and it didn’t move an inch all night. Proper boning, proper lacing. My House of CB one can sit this one out.</p>
@@ -491,7 +566,7 @@
             <figcaption>Deja M. <span>The Aria Top · UK 14</span></figcaption>
           </figure>
 
-          <figure class="review">
+          <figure class="review" data-reveal>
             <svg class="review-quote-mark" viewBox="0 0 48 32" aria-hidden="true"><use href="#quote-mark"/></svg>
             <blockquote>
               <p>Ordered on Thursday, wedding on Saturday. The Chapel arrived Friday morning, steamed out in ten minutes, and photographed like liquid.</p>
@@ -506,7 +581,7 @@
          BRAND STORY
          ================================================================== -->
     <section class="story section" id="story" aria-labelledby="story-title">
-      <div class="container story-inner">
+      <div class="container story-inner" data-reveal>
         <span class="eyebrow">Our story</span>
         <h2 id="story-title">Her name. His name. <span class="accent-italic">One label.</span></h2>
         <p>Rose Archer began with a wardrobe complaint: everything worth wearing on the nights that matter was either built badly or priced absurdly. Olivia designs — a fashion student with a ruler in one hand and strong opinions about seam allowances in the other. Jacob runs everything else. We cut small, considered drops instead of endless collections, in fabrics we’d want against our own skin, sized UK 6 to 16 and fitted on real bodies.</p>
@@ -519,7 +594,7 @@
          EMAIL CAPTURE
          ================================================================== -->
     <section class="newsletter section" id="newsletter" aria-labelledby="newsletter-title">
-      <div class="container newsletter-inner">
+      <div class="container newsletter-inner" data-reveal>
         <span class="eyebrow">Drop 02 is already on the cutting table</span>
         <h2 id="newsletter-title">The list hears first.</h2>
         <p>Drop dates, early access, and nothing else. We write rarely and only when it matters.</p>
